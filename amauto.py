@@ -26,7 +26,7 @@ pozadina_b64 = ucitaj_sliku_base64("AMBck.JPG")
 izvor_logotipa = logo_b64 if logo_b64 else "https://placeholder.com"
 stil_pozadine = f"url('{pozadina_b64}');" if pozadina_b64 else "linear-gradient(135deg, #111111 0%, #222222 100%);"
 
-# 3. Globalni CSS stilovi sa ugrađenom glatkom animacijom pozadine
+# 3. Globalni CSS stilovi sa pojačanim filmskim uvodnim efektom
 st.markdown(f"""
     <style>
     #MainMenu {{visibility: hidden;}}
@@ -36,6 +36,10 @@ st.markdown(f"""
     .block-container {{
         padding-top: 0px !important;
         padding-bottom: 0px !important;
+    }}
+    
+    html {{
+        scroll-behavior: smooth;
     }}
     
     /* Fiksirani beli header na vrhu ekrana */
@@ -76,7 +80,7 @@ st.markdown(f"""
         margin-top: 85px;
     }}
     
-    /* KONTEJNER ZA HERO SEKCIJU (Služi da sakrije ivice slike tokom zumiranja) */
+    /* KONTEJNER ZA HERO SEKCIJU */
     .hero-container {{
         position: relative;
         width: 100%;
@@ -88,15 +92,15 @@ st.markdown(f"""
         align-items: center;
     }}
     
-    /* ANIMIRANA POZADINA (Glatki uvodni Zoom-In i Fade efekat) */
-    @keyframes superZoomFade {{
+    /* POJAČANA ANIMACIJA POZADINE (Glatki Zoom-In + Izoštravanje/Blur efekat) */
+    @keyframes advancedZoomBlur {{
         0% {{
-            transform: scale(1.15);
-            opacity: 0.3;
+            transform: scale(1.25);
+            filter: blur(6px) brightness(0.3);
         }}
         100% {{
             transform: scale(1.0);
-            opacity: 1;
+            filter: blur(0px) brightness(1.0);
         }}
     }}
     
@@ -106,26 +110,27 @@ st.markdown(f"""
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.80)), {stil_pozadine}
+        background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75)), {stil_pozadine}
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
         z-index: 1;
-        animation: superZoomFade 3.5s ease-out forwards; /* Trajanje animacije 3.5 sekunde */
+        animation: advancedZoomBlur 3.2s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
     }}
     
-    /* TEKST IZNAD ANIMIRANE POZADINE */
+    /* TEKST I DUGME IZNAD POZADINE - Osiguran z-index prednji plan */
     .hero-content {{
         position: relative;
-        z-index: 2;
+        z-index: 99;
         text-align: center;
         color: white !important;
         padding: 40px;
+        width: 100%;
     }}
     
-    /* Animacija za postepeno pojavljivanje teksta */
-    @keyframes textFadeIn {{
-        from {{ opacity: 0; transform: translateY(15px); }}
+    /* Animacija za postepeno pojavljivanje elemenata */
+    @keyframes elementsFadeIn {{
+        from {{ opacity: 0; transform: translateY(20px); }}
         to {{ opacity: 1; transform: translateY(0); }}
     }}
     
@@ -136,7 +141,7 @@ st.markdown(f"""
         margin-bottom: 20px;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         color: white !important;
-        animation: textFadeIn 1.5s ease-out forwards;
+        animation: elementsFadeIn 1.4s ease-out forwards;
     }}
     
     .hero-content p {{
@@ -146,10 +151,10 @@ st.markdown(f"""
         margin: 0 auto 40px auto;
         line-height: 1.6;
         text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-        animation: textFadeIn 2.0s ease-out forwards;
+        animation: elementsFadeIn 1.8s ease-out forwards;
     }}
     
-    /* Dugme Kontaktirajte nas */
+    /* Crveno dugme u prvom planu */
     .hero-btn {{
         background-color: #E53E3E;
         color: white !important;
@@ -161,7 +166,7 @@ st.markdown(f"""
         display: inline-block;
         box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4);
         transition: 0.3s;
-        animation: textFadeIn 2.5s ease-out forwards;
+        animation: elementsFadeIn 2.2s ease-out forwards;
     }}
     .hero-btn:hover {{
         background-color: #C53030;
@@ -216,13 +221,10 @@ st.markdown(f"""
 # Otvaranje glavnog dela stranice ispod menija
 st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
-# HERO SEKCIJA SA ANIMIRANOM POZADINOM I TEKSTOM
+# HERO SEKCIJA SA ANIMIRANOM POZADINOM I TEKSTOM (Dugme izvučeno napred)
 st.markdown(f"""
     <div class="hero-container">
-        <!-- Sloj sa pozadinskom slikom koja se lagano zumira i stabilizuje -->
         <div class="hero-background-animated"></div>
-        
-        <!-- Sloj sa tekstom i dugmetom koji se postepeno pojavljuju -->
         <div class="hero-content">
             <h1><b style="font-weight: 900;">AM AUTO</b> agencija</h1>
             <p>Sve na jednom mestu za Vaše vozilo. Brza registracija, siguran uvoz motornih vozila i pouzdan platni promet.</p>
@@ -267,7 +269,7 @@ with col3:
         </div>
     """, unsafe_allow_html=True)
 
-# TAMNA KONTAKT SEKCIJA (Vraćen stari stabilni sistem bez eksternih linkova)
+# TAMNA KONTAKT SEKCIJA
 st.markdown("""
     <div id="kontakt" class="contact-footer" style="font-family: sans-serif;">
         <h2 style="font-weight: 700; margin-bottom: 10px;">KONTAKT INFORMACIJE</h2>
