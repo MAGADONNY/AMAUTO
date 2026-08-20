@@ -1,6 +1,6 @@
 import streamlit as st
 
-# 1. Podešavanje stranice (Mora biti prva komanda u skripti)
+# 1. Podešavanje stranice
 st.set_page_config(
     page_title="AM AUTO - Agencija za registraciju i uvoz vozila - Laćarak",
     page_icon="🚗",
@@ -117,7 +117,7 @@ st.markdown("""
         font-weight: 700;
         color: #111111;
         margin-bottom: 10px;
-    }}
+    }
     .title-divider {
         width: 50px;
         height: 3px;
@@ -200,7 +200,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 3. Prikazivanje strukture sajta direktno na ekranu (Čist HTML bez f-string konflikata)
+# 3. Prikazivanje strukture sajta direktno na ekranu
 st.markdown("""
     <!-- BELI HEADER SA LOGOOM -->
     <div class="custom-header">
