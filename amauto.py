@@ -1,7 +1,9 @@
 import streamlit as st
 import streamlit.components.v1 as components
+import base64
+import os
 
-# Podešavanje stranice (mora biti prva Streamlit komanda)
+# Podešavanje stranice
 st.set_page_config(
     page_title="AM AUTO - Agencija za registraciju i uvoz vozila",
     page_icon="🚗",
@@ -9,11 +11,22 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Tačne putanje do slika na tvom GitHub nalogu
-LOGO_URL = "https://githubusercontent.com"
-BACKGROUND_URL = "https://githubusercontent.com"
+# Funkcija za bezbedno pretvaranje lokalne slike u format koji sajt može da pročita
+def get_base64_image(image_path):
+    if os.path.exists(image_path):
+        with open(image_path, "rb") as img_file:
+            return "data:image/jpeg;base64," + base64.b64encode(img_file.read()).decode()
+    return ""
 
-# Kompletan HTML, CSS i JS spakovan u jednu bezbednu celinu
+# Učitavanje slika sa servera
+logo_base64 = get_base64_image("LOGO.JPG")
+bg_base64 = get_base64_image("AMBck.JPG")
+
+# Ako slika ne postoji, koristi se rezervni moderni gradijent
+bg_style = f"background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.75)), url('{bg_base64}');" if bg_base64 else "background: linear-gradient(135deg, #111111 0%, #222222 100%);"
+logo_src = logo_base64 if logo_base64 else "https://placeholder.com"
+
+# Kompletan HTML i CSS dizajn
 html_sadrzaj = f"""
 <!DOCTYPE html>
 <html lang="sr">
@@ -36,14 +49,8 @@ html_sadrzaj = f"""
         
         /* Uvodna animacija */
         @keyframes fadeInUp {{
-            from {{
-                opacity: 0;
-                transform: translateY(30px);
-            }}
-            to {{
-                opacity: 1;
-                transform: translateY(0);
-            }}
+            from {{ opacity: 0; transform: translateY(30px); }}
+            to {{ opacity: 1; transform: translateY(0); }}
         }}
         .animated-content {{
             animation: fadeInUp 1.4s ease-out forwards;
@@ -74,17 +81,17 @@ html_sadrzaj = f"""
             font-size: 16px;
         }}
         
-        /* Glavni sadržaj ispod headera */
+        /* Sadržaj ispod headera */
         .main-body {{
             margin-top: 85px;
         }}
         
-        /* Hero sekcija sa Audijem u pozadini */
+        /* Hero sekcija sa Audijem */
         .hero-section {{
-            background-color: #1a1a1a;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.75)), url('{BACKGROUND_URL}');
+            {bg_style}
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
             padding: 140px 5%;
             text-align: center;
             color: white;
@@ -121,9 +128,6 @@ html_sadrzaj = f"""
             box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4);
             transition: 0.3s;
         }}
-        .hero-btn:hover {{
-            background-color: #C53030;
-        }}
         
         /* Sekcija usluga */
         .services-section {{
@@ -157,26 +161,13 @@ html_sadrzaj = f"""
             background: #f9f9f9;
             border-radius: 4px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            transition: 0.3s;
         }}
         .card-black {{ border-top: 4px solid #111111; }}
         .card-red {{ border-top: 4px solid #E53E3E; }}
         
-        .card-icon {{
-            font-size: 40px;
-            margin-bottom: 15px;
-        }}
-        .service-card h3 {{
-            font-size: 20px;
-            font-weight: 700;
-            color: #111111;
-            margin-bottom: 15px;
-        }}
-        .service-card p {{
-            color: #666666;
-            font-size: 15px;
-            line-height: 1.6;
-        }}
+        .card-icon {{ font-size: 40px; margin-bottom: 15px; }}
+        .service-card h3 {{ font-size: 20px; font-weight: 700; color: #111111; margin-bottom: 15px; }}
+        .service-card p {{ color: #666666; font-size: 15px; line-height: 1.6; }}
         
         /* Kontakt sekcija */
         .footer-section {{
@@ -185,28 +176,16 @@ html_sadrzaj = f"""
             padding: 60px 5%;
             text-align: center;
         }}
-        .footer-section h2 {{
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 30px;
-        }}
-        .footer-section p {{
-            font-size: 16px;
-            color: #aaaaaa;
-            margin-bottom: 10px;
-        }}
-        .copyright {{
-            font-size: 14px;
-            color: #555555;
-            margin-top: 40px;
-        }}
+        .footer-section h2 {{ font-size: 26px; font-weight: 700; margin-bottom: 30px; }}
+        .footer-section p {{ font-size: 16px; color: #aaaaaa; margin-bottom: 10px; }}
+        .copyright {{ font-size: 14px; color: #555555; margin-top: 40px; }}
     </style>
 </head>
 <body>
 
     <div class="custom-header">
         <div class="logo-container">
-            <img src="{LOGO_URL}" alt="AM AUTO Logo" onerror="this.onerror=null; this.src='https://placeholder.com';">
+            <img src="{logo_src}" alt="AM AUTO Logo">
         </div>
         <div class="header-phone">
             <a href="tel:+381601234567">📞 060 / 123-4567</a>
@@ -217,7 +196,7 @@ html_sadrzaj = f"""
         <div class="hero-section">
             <h1>AM AUTO AGENCIJA</h1>
             <p>Sve na jednom mestu za Vaše vozilo. Brza registracija, siguran uvoz motornih vozila i pouzdan platni promet.</p>
-            <a href="tel:+381601234567" class="hero-btn">POZOVITE ODMAH</a>
+            <a href="#kontakt" class="hero-btn">KONTAKTIRAJTE NAS</a>
         </div>
         
         <div class="services-section">
@@ -233,7 +212,7 @@ html_sadrzaj = f"""
                 <div class="service-card card-red">
                     <div class="card-icon">🚢</div>
                     <h3>Uvoz vozila</h3>
-                    <p>Pomoć pri odabiru, organizacija transporta, carinjenje i kompletna dokumentacija za uvoz automobila.</p>
+                    <p>Pomoć pri odabiru, organization transporta, carinjenje i kompletna dokumentacija za uvoz automobila.</p>
                 </div>
                 <div class="service-card card-black">
                     <div class="card-icon">💳</div>
@@ -243,7 +222,7 @@ html_sadrzaj = f"""
             </div>
         </div>
         
-        <div class="footer-section">
+        <div id="kontakt" class="footer-section">
             <h2>KONTAKT INFORMACIJE</h2>
             <p>📍 Adresa: [Unesi tvoju adresu ovde]</p>
             <p>📧 Email: info@amauto.rs</p>
@@ -255,7 +234,7 @@ html_sadrzaj = f"""
 </html>
 """
 
-# Uklanjanje podrazumevanih Streamlit margina da bi sajt išao od ivice do ivice ekrana
+# Sredivanje margina u Streamlit-u
 st.markdown("""
     <style>
     .block-container { padding: 0px !important; }
@@ -263,5 +242,5 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Prikazivanje kompletnog sajta preko celog ekrana (visina 1000px obezbeđuje prostor za skrolovanje)
-components.html(html_sadrzaj, height=1000, scrolling=True)
+# Prikaz gotovog sajta
+components.html(html_sadrzaj, height=1100, scrolling=True)
