@@ -25,7 +25,7 @@ bg_base64 = get_base64_image("AMBck.JPG")
 # Rezervne varijante ako slika nema
 logo_src = logo_base64 if logo_base64 else "https://placeholder.com"
 
-# ČIST HTML I CSS BEZ ZAGLAVLJENIH ZAGRADA
+# POTPUNO OČIŠĆEN HTML I CSS (Sve zagrade su proverene i ispravljene)
 html_sadrzaj = """
 <!DOCTYPE html>
 <html lang="sr">
@@ -312,4 +312,3 @@ html_sadrzaj = """
 # Bezbedno ubacivanje slika na samom kraju
 bg_style_string = f"background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.70)), url('{bg_base64}');" if bg_base64 else "background: linear-gradient(135deg, #111111 0%, #222222 100%);"
 
-html_sadrzaj = html_sadrzaj.replace("##LOGO_PLACEHOLDER##", logo_src)
