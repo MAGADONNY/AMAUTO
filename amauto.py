@@ -25,7 +25,7 @@ bg_base64 = get_base64_image("AMBck.JPG")
 # Rezervne varijante ako slika nema
 logo_src = logo_base64 if logo_base64 else "https://placeholder.com"
 
-# ČIST HTML I CSS BEZ PYTHON INTERPOLACIJE (Nema više f-string grešaka)
+# ČIST HTML I CSS BEZ ZAGLAVLJENIH ZAGRADA
 html_sadrzaj = """
 <!DOCTYPE html>
 <html lang="sr">
@@ -97,7 +97,7 @@ html_sadrzaj = """
         /* Sadržaj ispod headera */
         .main-body {
             margin-top: 80px;
-        }}
+        }
         
         /* Hero sekcija sa Audijem */
         .hero-section {
@@ -309,6 +309,7 @@ html_sadrzaj = """
 </html>
 """
 
-# Bezbedno ubacivanje slika na samom kraju da se izbegne konflikt u Pythonu
+# Bezbedno ubacivanje slika na samom kraju
 bg_style_string = f"background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.70)), url('{bg_base64}');" if bg_base64 else "background: linear-gradient(135deg, #111111 0%, #222222 100%);"
 
+html_sadrzaj = html_sadrzaj.replace("##LOGO_PLACEHOLDER##", logo_src)
