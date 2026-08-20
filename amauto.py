@@ -267,34 +267,33 @@ with col3:
 
 st.markdown('<br><br id="kalkulator-sekcija"><br>', unsafe_allow_html=True)
 
-# --- NASLOV ZA KALKULATOR ---
-st.markdown('<h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif; font-size: 22px; letter-spacing: 1px;">Kalkulator registracije</h2>', unsafe_allow_html=True)
-st.markdown('<div style="width: 40px; height: 2px; background-color: #E53E3E; margin: 12px auto 25px auto;"></div>', unsafe_allow_html=True)
+# --- POPRAVLJEN NASLOV ZA KALKULATOR: Mali font, normal debljina ---
+st.markdown('<h2 style="text-align: center; font-weight: normal; color: #111111; font-family: sans-serif; font-size: 18px; letter-spacing: 1px;">Kalkulator registracije</h2>', unsafe_allow_html=True)
+st.markdown('<div style="width: 35px; height: 2px; background-color: #E53E3E; margin: 10px auto 25px auto;"></div>', unsafe_allow_html=True)
 
-# STRUKTURA KALKULATORA PREKO CELOG EKRANA SA UNUTRAŠNJIM HORIZONTALNIM KOLONAMA
-st.markdown('<div style="background-color: #f9f9f9; padding: 30px; border-radius: 6px; border: 1px solid #eeeeee; font-family: sans-serif; margin: 0 5%; margin-bottom: 20px;">', unsafe_allow_html=True)
+# SUŽAVANJE ŠIRINE POLJA (Kalkulator postavljen u uže centralne kolone)
+layout_col1, layout_col2, layout_col3 = st.columns([1, 2, 1])
 
-# Tri kolone za unos polja jedno pored drugog
-field_col1, field_col2, field_col3 = st.columns(3)
+with layout_col2:
+    st.markdown('<div style="background-color: #f9f9f9; padding: 25px; border-radius: 6px; border: 1px solid #eeeeee; font-family: sans-serif; margin-bottom: 10px;">', unsafe_allow_html=True)
+    
+    # Tri unutrašnje kolone za horizontalna polja u suženom prozoru
+    field_col1, field_col2, field_col3 = st.columns(3)
+    
+    with field_col1:
+        kubikaza = st.selectbox("Zapremina motora (cm³):", [
+            "Do 1150 cm³", "1150 - 1300 cm³", "1300 - 1600 cm³", 
+            "1600 - 2000 cm³", "2000 - 2500 cm³", "Preko 2500 cm³"
+        ])
 
-with field_col1:
-    kubikaza = st.selectbox("Zapremina motora (cm³):", [
-        "Do 1150 cm³", "1150 - 1300 cm³", "1300 - 1600 cm³", 
-        "1600 - 2000 cm³", "2000 - 2500 cm³", "Preko 2500 cm³"
-    ])
+    with field_col2:
+        snaga = st.slider("Snaga motora (kW):", min_value=20, max_value=250, value=75)
 
-with field_col2:
-    snaga = st.slider("Snaga motora (kW):", min_value=20, max_value=250, value=75)
+    with field_col3:
+        godiste = st.selectbox("Godište vozila:", [
+            "Novo vozilo", "Do 5 godina", 
+            "5 do 10 godina", "Preko 10 godina"
+        ])
 
-with field_col3:
-    godiste = st.selectbox("Godište vozila:", [
-        "Novo vozilo (Prva registracija)", "Do 5 godina starosti", 
-        "5 do 10 godina starosti", "Preko 10 godina starosti"
-    ])
-
-st.markdown('<br>', unsafe_allow_html=True)
-
-# Python logika za računanje cene
-cena_baza = 15000
-if kubikaza == "1150 - 1300 cm³": cena_baza += 4000
-elif kubikaza == "1300 - 1600 cm³": cena_baza += 8000
+    st.markdown('<br>', unsafe_allow_html=True)
+    
