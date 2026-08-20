@@ -3,7 +3,7 @@ import streamlit.components.v1 as components
 import base64
 import os
 
-# Podešavanje stranice
+# Podešavanje stranice - mora biti prva Streamlit komanda
 st.set_page_config(
     page_title="AM AUTO - Agencija za registraciju i uvoz vozila - Laćarak",
     page_icon="🚗",
@@ -11,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Funkcija za bezbedno pretvaranje lokalne slike u Base64 format
+# Funkcija za bezbedno pretvaranje slika u Base64 format
 def get_base64_image(image_path):
     if os.path.exists(image_path):
         with open(image_path, "rb") as img_file:
@@ -22,10 +22,10 @@ def get_base64_image(image_path):
 logo_base64 = get_base64_image("LOGO.JPG")
 bg_base64 = get_base64_image("AMBck.JPG")
 
-# Rezervne varijante ako slika nema
+# Rezervni logo ako slika ne postoji
 logo_src = logo_base64 if logo_base64 else "https://placeholder.com"
 
-# POTPUNO OČIŠĆEN HTML I CSS (Sve zagrade su proverene i ispravljene)
+# STABILAN I OČIŠĆEN HTML (Bez procenata u CSS-u i bez duplih zagrada)
 html_sadrzaj = """
 <!DOCTYPE html>
 <html lang="sr">
@@ -63,11 +63,11 @@ html_sadrzaj = """
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 100vw;
             background-color: #ffffff;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             z-index: 9999;
-            padding: 5px 5%;
+            padding: 5px 4vw;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -104,8 +104,8 @@ html_sadrzaj = """
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat !important;
-            width: 100%;
-            padding: 120px 5%;
+            width: 100vw;
+            padding: 120px 4vw;
             min-height: 600px;
             display: flex;
             flex-direction: column;
@@ -148,7 +148,7 @@ html_sadrzaj = """
         
         /* Sekcija usluga */
         .services-section {
-            padding: 80px 5%;
+            padding: 80px 4vw;
             background-color: #ffffff;
             text-align: center;
         }
@@ -190,7 +190,7 @@ html_sadrzaj = """
         .footer-section {
             background-color: #111111;
             color: white;
-            padding: 70px 5%;
+            padding: 70px 4vw;
             text-align: center;
         }
         .footer-section h2 { 
@@ -309,6 +309,4 @@ html_sadrzaj = """
 </html>
 """
 
-# Bezbedno ubacivanje slika na samom kraju
-bg_style_string = f"background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.70)), url('{bg_base64}');" if bg_base64 else "background: linear-gradient(135deg, #111111 0%, #222222 100%);"
-
+# Bezbedno ubacivanje slika na samom kraju bez ikakvih konflikata
