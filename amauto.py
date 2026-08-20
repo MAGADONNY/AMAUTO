@@ -24,7 +24,6 @@ pozadina_b64 = ucitaj_sliku_base64("AMBck.JPG")
 
 # Rezervni plan ako slike ne postoje na serveru
 izvor_logotipa = logo_b64 if logo_b64 else "https://placeholder.com"
-# Koristi se ISKLJUČIVO pozadina_b64 za hero sekciju, bez mešanja sa logom
 stil_pozadine = f"background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.80)), url('{pozadina_b64}');" if pozadina_b64 else "background: linear-gradient(135deg, #111111 0%, #222222 100%);"
 
 # 3. Globalni CSS stilovi za stabilan i čist grafički prikaz
@@ -94,18 +93,19 @@ st.markdown(f"""
         align-items: center;
     }}
     
+    /* Popravljeno: Naslov ima podrazumevano tanak font, a svesno forsira boju */
     .hero-section h1 {{
         font-size: 46px;
-        font-weight: 300; /* Tanji font za ceo naslov po defaultu */
+        font-weight: 300 !important;
         letter-spacing: 2px;
         margin-bottom: 20px;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         color: white !important;
     }}
     
-    /* Stil za boldirani deo naslova */
-    .hero-section h1 strong {{
-        font-weight: 800;
+    /* Popravljeno: AM AUTO dobija maksimalnu debljinu bez obzira na roditeljski stil */
+    .hero-section h1 span.bold-title {{
+        font-weight: 900 !important;
     }}
     
     .hero-section p {{
@@ -154,6 +154,15 @@ st.markdown(f"""
         text-align: center;
         margin-top: 60px;
     }}
+    
+    /* Popravljeno: Powered by zelen, normalan i bez podebljanja */
+    .powered-by {{
+        font-size: 13px;
+        color: #2ECC71 !important;
+        margin-top: 15px;
+        letter-spacing: 1px;
+        font-weight: normal !important;
+    }}
     </style>
 """, unsafe_allow_html=True)
 
@@ -174,10 +183,10 @@ st.markdown(f"""
 # Otvaranje glavnog dela stranice ispod menija
 st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
-# HERO SEKCIJA (Tekst i dugme unutar pozadine sa Audijem - Korigovan naslov)
+# HERO SEKCIJA (Precizno stilizovan naslov preko klase)
 st.markdown(f"""
     <div class="hero-section">
-        <h1><strong>AM AUTO</strong> agencija</h1>
+        <h1><span class="bold-title">AM AUTO</span> agencija</h1>
         <p>Sve na jednom mestu za Vaše vozilo. Brza registracija, siguran uvoz motornih vozila i pouzdan platni promet.</p>
         <a href="#kontakt" class="hero-btn">KONTAKTIRAJTE NAS</a>
     </div>
@@ -228,7 +237,7 @@ st.markdown("""
         <p style="font-size: 17px; color: #dddddd; margin-bottom: 15px;">📞 Telefon: <a href="tel:+381616065018" style="color: white; text-decoration: none;"><strong>061 / 60-65-018</strong></a></p>
         <p style="font-size: 17px; color: #dddddd; margin-bottom: 30px;">📧 Email: <a href="mailto:amauto@gmail.com" style="color: white; text-decoration: none;"><strong>amauto@gmail.com</strong></a></p>
         <p style="font-size: 14px; color: #555555; margin-top: 40px;">&copy; 2026 AM AUTO. Sva prava zadržana.</p>
-        <p style="font-size: 13px; color: #E53E3E; margin-top: 10px; font-weight: bold; letter-spacing: 2px;">Powered by MAGICOMP</p>
+        <div class="powered-by">Powered by MAGICOMP</div>
     </div>
 """, unsafe_allow_html=True)
 
