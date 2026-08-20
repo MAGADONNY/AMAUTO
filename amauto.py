@@ -93,7 +93,7 @@ st.markdown(f"""
         align-items: center;
     }}
     
-    /* Popravljeno: Naslov ima podrazumevano tanak font, a svesno forsira boju */
+    /* Glavni naslov - Podrazumevano postavljen na tanak font */
     .hero-section h1 {{
         font-size: 46px;
         font-weight: 300 !important;
@@ -101,11 +101,6 @@ st.markdown(f"""
         margin-bottom: 20px;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         color: white !important;
-    }}
-    
-    /* Popravljeno: AM AUTO dobija maksimalnu debljinu bez obzira na roditeljski stil */
-    .hero-section h1 span.bold-title {{
-        font-weight: 900 !important;
     }}
     
     .hero-section p {{
@@ -155,7 +150,7 @@ st.markdown(f"""
         margin-top: 60px;
     }}
     
-    /* Popravljeno: Powered by zelen, normalan i bez podebljanja */
+    /* Powered by zelen, normalan i bez podebljanja */
     .powered-by {{
         font-size: 13px;
         color: #2ECC71 !important;
@@ -183,10 +178,10 @@ st.markdown(f"""
 # Otvaranje glavnog dela stranice ispod menija
 st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
-# HERO SEKCIJA (Precizno stilizovan naslov preko klase)
+# HERO SEKCIJA (Direktno forsirano podebljanje preko inline stila za PC pretraživače)
 st.markdown(f"""
     <div class="hero-section">
-        <h1><span class="bold-title">AM AUTO</span> agencija</h1>
+        <h1><span style="font-weight: 900 !important;">AM AUTO</span> agencija</h1>
         <p>Sve na jednom mestu za Vaše vozilo. Brza registracija, siguran uvoz motornih vozila i pouzdan platni promet.</p>
         <a href="#kontakt" class="hero-btn">KONTAKTIRAJTE NAS</a>
     </div>
@@ -235,7 +230,7 @@ st.markdown("""
         <div style="width: 35px; height: 2px; background-color: #E53E3E; margin: 0 auto 40px auto;"></div>
         <p style="font-size: 17px; color: #dddddd; margin-bottom: 15px;">📍 Adresa: <strong>1. Novembar 250, LAĆARAK</strong></p>
         <p style="font-size: 17px; color: #dddddd; margin-bottom: 15px;">📞 Telefon: <a href="tel:+381616065018" style="color: white; text-decoration: none;"><strong>061 / 60-65-018</strong></a></p>
-        <p style="font-size: 17px; color: #dddddd; margin-bottom: 30px;">📧 Email: <a href="mailto:am.auto@gmail.com" style="color: white; text-decoration: none;"><strong>am.auto@gmail.com</strong></a></p>
+        <p style="font-size: 17px; color: #dddddd; margin-bottom: 30px;">📧 Email: <a href="mailto:amauto@gmail.com" style="color: white; text-decoration: none;"><strong>amauto@gmail.com</strong></a></p>
         <p style="font-size: 14px; color: #555555; margin-top: 40px;">&copy; 2026 AM AUTO. Sva prava zadržana.</p>
         <div class="powered-by">Powered by MAGICOMP</div>
     </div>
