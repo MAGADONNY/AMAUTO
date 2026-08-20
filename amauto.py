@@ -92,7 +92,7 @@ st.markdown(f"""
         align-items: center;
     }}
     
-    /* POJAČANA ANIMACIJA POZADINE */
+    /* ANIMACIJA POZADINE */
     @keyframes advancedZoomBlur {{
         0% {{
             transform: scale(1.25);
@@ -193,7 +193,7 @@ st.markdown(f"""
     .powered-by {{
         font-size: 13px;
         color: #2ECC71 !important;
-        margin-top: 25px;
+        margin-top: 15px;
         letter-spacing: 1px;
         font-weight: normal !important;
     }}
@@ -267,18 +267,17 @@ with col3:
 
 st.markdown('<br><br id="kalkulator-sekcija"><br>', unsafe_allow_html=True)
 
-# --- NOVA SEKCIJA: ORIJENTACIONI KALKULATOR ---
-st.markdown('<h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif;">ORIJENTACIONI KALKULATOR</h2>', unsafe_allow_html=True)
-st.markdown('<div style="width: 50px; height: 3px; background-color: #E53E3E; margin: 15px auto 30px auto;"></div>', unsafe_allow_html=True)
+# --- SMANJENI NASLOV ZA KALKULATOR ---
+st.markdown('<h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif; font-size: 22px; letter-spacing: 1px;">Kalkulator registracije</h2>', unsafe_allow_html=True)
+st.markdown('<div style="width: 40px; height: 2px; background-color: #E53E3E; margin: 12px auto 25px auto;"></div>', unsafe_allow_html=True)
 
-# Centrirani prozor za kalkulator pomoću Streamlit kolona
-calc_col1, calc_col2, calc_col3 = st.columns([1, 2, 1])
+# SMANJIVANJE ŠIRINE POLJA ZA 50% (Pomoću 4 kolone, gde kalkulator zauzima dve središnje)
+calc_c1, calc_c2, calc_c3, calc_c4 = st.columns([1, 2, 2, 1])
 
-with calc_col2:
-    st.markdown('<div style="background-color: #f9f9f9; padding: 30px; border-radius: 8px; border: 1px solid #eeeeee; font-family: sans-serif;">', unsafe_allow_html=True)
+with calc_c2:
+    st.markdown('<div style="background-color: #f9f9f9; padding: 25px; border-radius: 6px; border: 1px solid #eeeeee; font-family: sans-serif; margin-bottom: 20px;">', unsafe_allow_html=True)
     
-    # Unos podataka od strane klijenta
-    kubikaza = st.selectbox("Izaberite zapreminu motora (cm³):", [
+    kubikaza = st.selectbox("Zapremina motora (cm³):", [
         "Do 1150 cm³", "1150 - 1300 cm³", "1300 - 1600 cm³", 
         "1600 - 2000 cm³", "2000 - 2500 cm³", "Preko 2500 cm³"
     ])
@@ -292,7 +291,7 @@ with calc_col2:
     
     st.markdown('<br>', unsafe_allow_html=True)
     
-    # Računanje orijentacione cene kroz bazičnu Python logiku
     cena_baza = 15000
     if kubikaza == "1150 - 1300 cm³": cena_baza += 4000
     elif kubikaza == "1300 - 1600 cm³": cena_baza += 8000
+    elif kubikaza == "1600 - 2000 cm³": cena_baza += 14000
