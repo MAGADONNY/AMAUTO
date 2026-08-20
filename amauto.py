@@ -8,35 +8,27 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Direktni i provereni RAW linkovi sa tvog GitHub-a za stabilno učitavanje
-LOGO_URL = "https://githubusercontent.com"
-BACKGROUND_URL = "https://githubusercontent.com"
-
-# 3. Ubacivanje CSS stilova direktno u glavnu stranicu (Bezbedno i bez iframe-a)
-st.markdown(f"""
+# 2. Globalni CSS stilovi za sakrivanje Streamlit elemenata i aktivaciju animacije
+st.markdown("""
     <style>
-    /* Sakrivanje Streamlit menija i footera */
-    #MainMenu {{visibility: hidden;}}
-    footer {{visibility: hidden;}}
-    header {{visibility: hidden;}}
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
     
-    /* Resetovanje margina aplikacije na nulu */
-    .block-container {{
+    .block-container {
         padding: 0px !important;
-    }}
+    }
     
-    /* Glavna uvodna animacija (Fade In + Slide Up) */
-    @keyframes fadeInUp {{
-        from {{ opacity: 0; transform: translateY(25px); }}
-        to {{ opacity: 1; transform: translateY(0); }}
-    }}
-    .animated-content {{
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(25px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animated-content {
         animation: fadeInUp 1.2s ease-out forwards;
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    }}
+    }
     
-    /* Fiksirani beli header na vrhu ekrana */
-    .custom-header {{
+    .custom-header {
         position: fixed;
         top: 0;
         left: 0;
@@ -49,29 +41,27 @@ st.markdown(f"""
         justify-content: space-between;
         align-items: center;
         height: 80px;
-    }}
-    .logo-container img {{
+    }
+    .logo-container img {
         height: 60px;
         width: auto;
-    }}
-    .header-phone a {{
+    }
+    .header-phone a {
         color: #111111;
         text-decoration: none;
         font-weight: bold;
         font-size: 16px;
-    }}
-    .header-phone a:hover {{
+    }
+    .header-phone a:hover {
         color: #E53E3E;
-    }}
+    }
     
-    /* Odmak od vrha da sadržaj ne upadne pod header */
-    .main-body-wrapper {{
+    .main-body-wrapper {
         margin-top: 80px;
-    }}
+    }
     
-    /* Hero sekcija sa Audijem */
-    .hero-section {{
-        background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.70)), url('{BACKGROUND_URL}');
+    .hero-section {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.70)), url('https://githubusercontent.com');
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
@@ -84,23 +74,23 @@ st.markdown(f"""
         align-items: center;
         text-align: center;
         color: white;
-    }}
-    .hero-section h1 {{
+    }
+    .hero-section h1 {
         font-size: 46px;
         font-weight: 800;
         letter-spacing: 2px;
         margin-bottom: 20px;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-    }}
-    .hero-section p {{
+    }
+    .hero-section p {
         font-size: 19px;
         color: #e0e0e0;
         max-width: 600px;
         margin: 0 auto 40px auto;
         line-height: 1.6;
         text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-    }}
-    .hero-btn {{
+    }
+    .hero-btn {
         background-color: #E53E3E;
         color: white;
         padding: 16px 40px;
@@ -111,37 +101,36 @@ st.markdown(f"""
         display: inline-block;
         box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4);
         transition: 0.3s;
-    }}
-    .hero-btn:hover {{
+    }
+    .hero-btn:hover {
         background-color: #C53030;
         transform: translateY(-2px);
-    }}
+    }
     
-    /* Sekcija sa karticama usluga */
-    .services-section {{
+    .services-section {
         padding: 80px 5%;
         background-color: #ffffff;
         text-align: center;
-    }}
-    .services-section h2 {{
+    }
+    .services-section h2 {
         font-size: 30px;
         font-weight: 700;
         color: #111111;
         margin-bottom: 10px;
     }}
-    .title-divider {{
+    .title-divider {
         width: 50px;
         height: 3px;
         background-color: #E53E3E;
         margin: 0 auto 50px auto;
-    }}
-    .services-grid {{
+    }
+    .services-grid {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         gap: 30px;
-    }}
-    .service-card {{
+    }
+    .service-card {
         flex: 1;
         min-width: 280px;
         max-width: 350px;
@@ -149,76 +138,74 @@ st.markdown(f"""
         background: #f9f9f9;
         border-radius: 4px;
         box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-    }}
-    .card-black {{ border-top: 4px solid #111111; }}
-    .card-red {{ border-top: 4px solid #E53E3E; }}
+    }
+    .card-black { border-top: 4px solid #111111; }
+    .card-red { border-top: 4px solid #E53E3E; }
     
-    .card-icon {{ font-size: 40px; margin-bottom: 15px; }}
-    .service-card h3 {{ font-size: 20px; font-weight: 700; color: #111111; margin-bottom: 15px; }}
-    .service-card p {{ color: #666666; font-size: 15px; line-height: 1.6; }}
+    .card-icon { font-size: 40px; margin-bottom: 15px; }
+    .service-card h3 { font-size: 20px; font-weight: 700; color: #111111; margin-bottom: 15px; }
+    .service-card p { color: #666666; font-size: 15px; line-height: 1.6; }
     
-    /* Kontakt zona / Tamni footer */
-    .footer-section {{
+    .footer-section {
         background-color: #111111;
         color: white;
         padding: 70px 5%;
         text-align: center;
-    }}
-    .footer-section h2 {{ 
+    }
+    .footer-section h2 { 
         font-size: 28px; 
         font-weight: 700; 
         margin-bottom: 10px; 
         letter-spacing: 1px;
-    }}
-    .footer-divider {{
+    }
+    .footer-divider {
         width: 35px;
         height: 2px;
         background-color: #E53E3E;
         margin: 0 auto 40px auto;
-    }}
-    .contact-item {{
+    }
+    .contact-item {
         font-size: 17px;
         color: #dddddd;
         margin-bottom: 15px;
-    }}
-    .contact-item a {{
+    }
+    .contact-item a {
         color: #ffffff;
         text-decoration: none;
         font-weight: bold;
         transition: 0.3s;
-    }}
-    .contact-item a:hover {{
+    }
+    .contact-item a:hover {
         color: #E53E3E;
-    }}
-    .copyright {{ 
+    }
+    .copyright { 
         font-size: 14px; 
         color: #555555; 
         margin-top: 40px; 
-    }}
-    .powered-by {{
+    }
+    .powered-by {
         font-size: 13px;
         color: #E53E3E;
         margin-top: 10px;
         letter-spacing: 2px;
         font-weight: bold;
-    }}
+    }
     
-    /* Prilagođavanje za ekrane mobilnih telefona */
-    @media (max-width: 768px) {{
-        .hero-section {{ min-height: 480px; padding: 100px 20px; }}
-        .hero-section h1 {{ font-size: 32px; }}
-        .hero-section p {{ font-size: 16px; }}
-        .custom-header {{ padding: 10px 20px; }}
-    }}
+    @media (max-width: 768px) {
+        .hero-section { min-height: 480px; padding: 100px 20px; }
+        .hero-section h1 { font-size: 32px; }
+        .hero-section p { font-size: 16px; }
+        .custom-header { padding: 10px 20px; }
+    }
     </style>
 """, unsafe_allow_html=True)
 
-# 4. Prikazivanje strukture sajta direktno na glavnom ekranu
-st.markdown(f"""
-    <!-- BELI HEADER SA TVOJIM LOGOOM -->
+# 3. Prikazivanje strukture sajta direktno na ekranu (Čist HTML bez f-string konflikata)
+st.markdown("""
+    <!-- BELI HEADER SA LOGOOM -->
     <div class="custom-header">
         <div class="logo-container">
-            <img src="{LOGO_URL}" alt="AM AUTO Logo" onerror="this.onerror=null; this.src='https://placeholder.com';">
+            <img src="https://githubusercontent.com" alt="AM AUTO Logo" onerror="this.onerror=null; this.src='https://placeholder.com';">
         </div>
         <div class="header-phone">
             <a href="tel:+381616065018">📞 061 / 60-65-018</a>
