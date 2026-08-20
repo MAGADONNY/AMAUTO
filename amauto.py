@@ -26,7 +26,13 @@ bg_base64 = get_base64_image("AMBck.JPG")
 bg_style = f"background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.70)), url('{bg_base64}');" if bg_base64 else "background: linear-gradient(135deg, #111111 0%, #222222 100%);"
 logo_src = logo_base64 if logo_base64 else "https://placeholder.com"
 
-# Kompletan HTML i CSS dizajn sa popravljenom proporcijom slike
+# Definisane ikone za potpis van f-stringa radi bezbednosti
+tref = "&clubs;"
+karo = "&diams;"
+herc = "&hearts;"
+pik = "&spades;"
+
+# Kompletan HTML i CSS dizajn (fiksiran SyntaxError)
 html_sadrzaj = f"""
 <!DOCTYPE html>
 <html lang="sr">
@@ -100,17 +106,15 @@ html_sadrzaj = f"""
             margin-top: 80px;
         }}
         
-        /* Hero sekcija sa Audijem - Proporcija zaključana na celost slike */
+        /* Hero sekcija sa Audijem - Stabilna visina bez odsecanja */
         .hero-section {{
             {bg_style}
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat !important;
             width: 100%;
-            padding: 100px 5%;
-            aspect-ratio: 16 / 9; /* Garantuje prikaz cele slike bez odsecanja na PC-u */
-            min-height: 580px;
-            max-height: 750px;
+            padding: 120px 5%;
+            min-height: 600px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -123,7 +127,7 @@ html_sadrzaj = f"""
             font-weight: 800;
             letter-spacing: 2px;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }}
         .hero-section p {{
             font-size: 19px;
@@ -231,14 +235,13 @@ html_sadrzaj = f"""
         .powered-by {{
             font-size: 13px;
             color: #E53E3E;
-            margin-top: 8px;
-            letter-spacing: 1px;
+            margin-top: 10px;
+            letter-spacing: 2px;
         }}
         
         /* Responzivnost za mobilne telefone */
         @media (max-width: 768px) {{
             .hero-section {{
-                aspect-ratio: auto;
                 min-height: 480px;
             }}
             .hero-section h1 {{ font-size: 32px; }}
@@ -305,3 +308,4 @@ html_sadrzaj = f"""
                 📧 Email: <a href="mailto:amauto@gmail.com"><strong>amauto@gmail.com</strong></a>
             </div>
             
+            <p class="copyright">&copy; 2026 AM AUTO. Sva prava zadržana.</p>
