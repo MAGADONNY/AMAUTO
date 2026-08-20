@@ -22,18 +22,11 @@ def get_base64_image(image_path):
 logo_base64 = get_base64_image("LOGO.JPG")
 bg_base64 = get_base64_image("AMBck.JPG")
 
-# Konfiguracija pozadina
-bg_style = f"background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.70)), url('{bg_base64}');" if bg_base64 else "background: linear-gradient(135deg, #111111 0%, #222222 100%);"
+# Rezervne varijante ako slika nema
 logo_src = logo_base64 if logo_base64 else "https://placeholder.com"
 
-# Definisane ikone za potpis van f-stringa radi bezbednosti
-tref = "&clubs;"
-karo = "&diams;"
-herc = "&hearts;"
-pik = "&spades;"
-
-# Kompletan HTML i CSS dizajn (fiksiran SyntaxError)
-html_sadrzaj = f"""
+# ČIST HTML I CSS BEZ PYTHON INTERPOLACIJE (Nema više f-string grešaka)
+html_sadrzaj = """
 <!DOCTYPE html>
 <html lang="sr">
 <head>
@@ -41,32 +34,32 @@ html_sadrzaj = f"""
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AM AUTO - Laćarak</title>
     <style>
-        * {{
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }}
-        html {{
+        }
+        html {
             scroll-behavior: smooth;
-        }}
-        body {{
+        }
+        body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background-color: #ffffff;
             color: #111111;
             overflow-x: hidden;
-        }}
+        }
         
         /* Glavna uvodna animacija */
-        @keyframes fadeInUp {{
-            from {{ opacity: 0; transform: translateY(20px); }}
-            to {{ opacity: 1; transform: translateY(0); }}
-        }}
-        .animated-content {{
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animated-content {
             animation: fadeInUp 1.2s ease-out forwards;
-        }}
+        }
         
         /* Fiksirani beli header */
-        .custom-header {{
+        .custom-header {
             position: fixed;
             top: 0;
             left: 0;
@@ -79,36 +72,35 @@ html_sadrzaj = f"""
             justify-content: space-between;
             align-items: center;
             height: 80px;
-        }}
-        .logo-container {{
+        }
+        .logo-container {
             display: flex;
             align-items: center;
             height: 100%;
-        }}
-        .logo-container img {{
+        }
+        .logo-container img {
             height: 60px;
             width: auto;
             object-fit: contain;
-        }}
-        .header-phone a {{
+        }
+        .header-phone a {
             color: #111111;
             text-decoration: none;
             font-weight: bold;
             font-size: 16px;
             transition: 0.3s;
-        }}
-        .header-phone a:hover {{
+        }
+        .header-phone a:hover {
             color: #E53E3E;
-        }}
+        }
         
         /* Sadržaj ispod headera */
-        .main-body {{
+        .main-body {
             margin-top: 80px;
         }}
         
-        /* Hero sekcija sa Audijem - Stabilna visina bez odsecanja */
-        .hero-section {{
-            {bg_style}
+        /* Hero sekcija sa Audijem */
+        .hero-section {
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat !important;
@@ -121,23 +113,23 @@ html_sadrzaj = f"""
             align-items: center;
             text-align: center;
             color: white;
-        }}
-        .hero-section h1 {{
+        }
+        .hero-section h1 {
             font-size: 46px;
             font-weight: 800;
             letter-spacing: 2px;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-        }}
-        .hero-section p {{
+        }
+        .hero-section p {
             font-size: 19px;
             color: #e0e0e0;
             max-width: 600px;
             margin: 0 auto 40px auto;
             line-height: 1.6;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-        }}
-        .hero-btn {{
+        }
+        .hero-btn {
             background-color: #E53E3E;
             color: white;
             padding: 16px 40px;
@@ -148,37 +140,37 @@ html_sadrzaj = f"""
             display: inline-block;
             box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4);
             transition: 0.3s;
-        }}
-        .hero-btn:hover {{
+        }
+        .hero-btn:hover {
             background-color: #C53030;
             transform: translateY(-2px);
-        }}
+        }
         
         /* Sekcija usluga */
-        .services-section {{
+        .services-section {
             padding: 80px 5%;
             background-color: #ffffff;
             text-align: center;
-        }}
-        .services-section h2 {{
+        }
+        .services-section h2 {
             font-size: 30px;
             font-weight: 700;
             color: #111111;
             margin-bottom: 10px;
-        }}
-        .title-divider {{
+        }
+        .title-divider {
             width: 50px;
             height: 3px;
             background-color: #E53E3E;
             margin: 0 auto 50px auto;
-        }}
-        .services-grid {{
+        }
+        .services-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 30px;
-        }}
-        .service-card {{
+        }
+        .service-card {
             flex: 1;
             min-width: 280px;
             max-width: 350px;
@@ -186,67 +178,67 @@ html_sadrzaj = f"""
             background: #f9f9f9;
             border-radius: 4px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-        }}
-        .card-black {{ border-top: 4px solid #111111; }}
-        .card-red {{ border-top: 4px solid #E53E3E; }}
+        }
+        .card-black { border-top: 4px solid #111111; }
+        .card-red { border-top: 4px solid #E53E3E; }
         
-        .card-icon {{ font-size: 40px; margin-bottom: 15px; }}
-        .service-card h3 {{ font-size: 20px; font-weight: 700; color: #111111; margin-bottom: 15px; }}
-        .service-card p {{ color: #666666; font-size: 15px; line-height: 1.6; }}
+        .card-icon { font-size: 40px; margin-bottom: 15px; }
+        .service-card h3 { font-size: 20px; font-weight: 700; color: #111111; margin-bottom: 15px; }
+        .service-card p { color: #666666; font-size: 15px; line-height: 1.6; }
         
         /* Kontakt sekcija */
-        .footer-section {{
+        .footer-section {
             background-color: #111111;
             color: white;
             padding: 70px 5%;
             text-align: center;
-        }}
-        .footer-section h2 {{ 
+        }
+        .footer-section h2 { 
             font-size: 28px; 
             font-weight: 700; 
             margin-bottom: 10px; 
             letter-spacing: 1px;
-        }}
-        .footer-divider {{
+        }
+        .footer-divider {
             width: 35px;
             height: 2px;
             background-color: #E53E3E;
             margin: 0 auto 40px auto;
-        }}
-        .contact-item {{
+        }
+        .contact-item {
             font-size: 17px;
             color: #dddddd;
             margin-bottom: 15px;
-        }}
-        .contact-item a {{
+        }
+        .contact-item a {
             color: #ffffff;
             text-decoration: none;
             font-weight: bold;
             transition: 0.3s;
-        }}
-        .contact-item a:hover {{
+        }
+        .contact-item a:hover {
             color: #E53E3E;
-        }}
-        .copyright {{ 
+        }
+        .copyright { 
             font-size: 14px; 
             color: #555555; 
             margin-top: 40px; 
-        }}
-        .powered-by {{
+        }
+        .powered-by {
             font-size: 13px;
             color: #E53E3E;
             margin-top: 10px;
             letter-spacing: 2px;
-        }}
+        }
         
         /* Responzivnost za mobilne telefone */
-        @media (max-width: 768px) {{
-            .hero-section {{
+        @media (max-width: 768px) {
+            .hero-section {
                 min-height: 480px;
-            }}
-            .hero-section h1 {{ font-size: 32px; }}
-            .hero-section p {{ font-size: 16px; }}
-        }}
+            }
+            .hero-section h1 { font-size: 32px; }
+            .hero-section p { font-size: 16px; }
+        }
     </style>
 </head>
 <body>
@@ -254,7 +246,7 @@ html_sadrzaj = f"""
     <!-- HEADER SA LOGOOM I PODACIMA -->
     <div class="custom-header">
         <div class="logo-container">
-            <img src="{logo_src}" alt="AM AUTO Logo">
+            <img src="##LOGO_PLACEHOLDER##" alt="AM AUTO Logo">
         </div>
         <div class="header-phone">
             <a href="tel:+381616065018">📞 061 / 60-65-018</a>
@@ -263,7 +255,7 @@ html_sadrzaj = f"""
 
     <!-- GLAVNI SADRŽAJ -->
     <div class="main-body animated-content">
-        <div class="hero-section">
+        <div class="hero-section" style="##BG_PLACEHOLDER##">
             <h1>AM AUTO AGENCIJA</h1>
             <p>Sve na jednom mestu za Vaše vozilo. Brza registracija, siguran uvoz motornih vozila i pouzdan platni promet.</p>
             <a href="#kontakt" class="hero-btn">KONTAKTIRAJTE NAS</a>
@@ -309,3 +301,14 @@ html_sadrzaj = f"""
             </div>
             
             <p class="copyright">&copy; 2026 AM AUTO. Sva prava zadržana.</p>
+            <div class="powered-by">Powered by MAGICOMP</div>
+        </div>
+    </div>
+
+</body>
+</html>
+"""
+
+# Bezbedno ubacivanje slika na samom kraju da se izbegne konflikt u Pythonu
+bg_style_string = f"background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.70)), url('{bg_base64}');" if bg_base64 else "background: linear-gradient(135deg, #111111 0%, #222222 100%);"
+
