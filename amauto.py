@@ -24,7 +24,8 @@ pozadina_b64 = ucitaj_sliku_base64("AMBck.JPG")
 
 # Rezervni plan ako slike ne postoje na serveru
 izvor_logotipa = logo_b64 if logo_b64 else "https://placeholder.com"
-stil_pozadine = f"background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75)), url('{pozadina_b64}');" if pozadina_b64 else "background: linear-gradient(135deg, #111111 0%, #222222 100%);"
+# Koristi se ISKLJUČIVO pozadina_b64 za hero sekciju, bez mešanja sa logom
+stil_pozadine = f"background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.80)), url('{pozadina_b64}');" if pozadina_b64 else "background: linear-gradient(135deg, #111111 0%, #222222 100%);"
 
 # 3. Globalni CSS stilovi za stabilan i čist grafički prikaz
 st.markdown(f"""
@@ -77,32 +78,37 @@ st.markdown(f"""
     }}
     
     /* Tamna Hero sekcija sa Audijem u pozadini */
-    .hero-bg {{
+    .hero-section {{
         {stil_pozadine}
         background-size: cover;
         background-position: center center;
-        background-repeat: no-repeat;
+        background-repeat: no-repeat !important;
         width: 100%;
         padding: 120px 40px;
         text-align: center;
         color: white !important;
-        min-height: 550px;
+        min-height: 580px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }}
     
-    .hero-bg h1 {{
+    .hero-section h1 {{
         font-size: 46px;
-        font-weight: 800;
+        font-weight: 300; /* Tanji font za ceo naslov po defaultu */
         letter-spacing: 2px;
         margin-bottom: 20px;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         color: white !important;
     }}
     
-    .hero-bg p {{
+    /* Stil za boldirani deo naslova */
+    .hero-section h1 strong {{
+        font-weight: 800;
+    }}
+    
+    .hero-section p {{
         font-size: 19px;
         color: #e0e0e0 !important;
         max-width: 600px;
@@ -168,10 +174,10 @@ st.markdown(f"""
 # Otvaranje glavnog dela stranice ispod menija
 st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
-# HERO SEKCIJA (Tekst i dugme unutar pozadine sa Audijem)
+# HERO SEKCIJA (Tekst i dugme unutar pozadine sa Audijem - Korigovan naslov)
 st.markdown(f"""
-    <div class="hero-bg">
-        <h1>AM AUTO AGENCIJA</h1>
+    <div class="hero-section">
+        <h1><strong>AM AUTO</strong> agencija</h1>
         <p>Sve na jednom mestu za Vaše vozilo. Brza registracija, siguran uvoz motornih vozila i pouzdan platni promet.</p>
         <a href="#kontakt" class="hero-btn">KONTAKTIRAJTE NAS</a>
     </div>
