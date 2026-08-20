@@ -265,7 +265,7 @@ with col3:
         </div>
     """, unsafe_allow_html=True)
 
-# POMERENO NAGORE: Mala distanca, odmah se nastavlja kalkulator
+# POMERENO NAGORE: Odmah se nastavlja kalkulator bez velikih praznina
 st.markdown('<div id="kalkulator-sekcija" style="margin-top: 40px;"></div>', unsafe_allow_html=True)
 
 # --- NASLOV ZA KALKULATOR: Mali font, normal debljina ---
