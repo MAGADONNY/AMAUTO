@@ -1,6 +1,6 @@
 import streamlit as st
 
-# 1. Podešavanje stranice (Garantuje čist mobile-friendly izgled)
+# 1. Podešavanje stranice
 st.set_page_config(
     page_title="AM AUTO - Agencija za registraciju i uvoz vozila - Laćarak",
     page_icon="🚗",
@@ -8,11 +8,11 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Linkovi ka tvom logotipu i pozadini sa Audijem na GitHub-u
+# 2. Linkovi ka slikama na tvog GitHub nalogu
 LOGO_URL = "https://githubusercontent.com"
 BACKGROUND_URL = "https://githubusercontent.com"
 
-# 3. CSS za fiksirani beli header i moderan dizajn elemenata
+# 3. Globalni CSS stilovi za čist grafički prikaz
 st.markdown(f"""
     <style>
     #MainMenu {{visibility: hidden;}}
@@ -37,24 +37,63 @@ st.markdown(f"""
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: 80px;
+        height: 85px;
     }}
     
-    /* Pomak sadržaja nadole zbog headera */
+    .logo-container img {{
+        height: 70px; /* Povećana visina za bolju vidljivost logotipa */
+        width: auto;
+        display: block;
+    }}
+    
+    .header-phone a {{
+        color: #111111;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 16px;
+    }}
+    .header-phone a:hover {{
+        color: #E53E3E;
+    }}
+    
+    /* Pomak celog sadržaja nadole zbog fiksiranog menija */
     .main-content {{
-        margin-top: 100px;
+        margin-top: 85px;
     }}
     
-    /* Tamna Hero sekcija sa Audijem u pozadini */
+    /* Tamna Hero sekcija sa Audijem u pozadini i tekstom u njoj */
     .hero-bg {{
-        background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75)), url('{BACKGROUND_URL}');
+        background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.70)), url('{BACKGROUND_URL}');
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
+        width: 100%;
         padding: 120px 40px;
-        border-radius: 8px;
         text-align: center;
-        color: white;
+        color: white !important;
+        min-height: 550px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }}
+    
+    .hero-bg h1 {{
+        font-size: 46px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        color: white !important;
+    }}
+    
+    .hero-bg p {{
+        font-size: 19px;
+        color: #e0e0e0 !important;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
     }}
     
     /* Stilizacija kartica sa uslugama */
@@ -68,80 +107,81 @@ st.markdown(f"""
     .box-black {{ border-top: 4px solid #111111; }}
     .box-red {{ border-top: 4px solid #E53E3E; }}
     
-    /* Kontakt sekcija na dnu */
+    /* Kontakt sekcija na dnu (Footer) */
     .contact-footer {{
         background-color: #111111;
         color: white;
         padding: 60px 40px;
-        border-radius: 8px;
         text-align: center;
         margin-top: 60px;
     }}
     </style>
 """, unsafe_allow_html=True)
 
-# 4. PRIKAZIVANJE SAJTA PREKO FABRIČKIH STREAMLIT FUNKCIJA (Nema grešaka)
+# 4. IZGRADNJA GRAFIČKIH ELEMENATA
 
-# Beli header sa logotipom i telefonom
+# Prikaz belog headera sa uočljivim logoom
 st.markdown(f"""
     <div class="custom-header">
-        <div>
-            <img src="{LOGO_URL}" style="height: 60px; width: auto;" onerror="this.onerror=null; this.src='https://placeholder.com';">
+        <div class="logo-container">
+            <img src="{LOGO_URL}" alt="AM AUTO Logo" onerror="this.onerror=null; this.src='https://placeholder.com';">
         </div>
-        <div style="font-family: sans-serif; font-weight: bold;">
-            <a href="tel:+381616065018" style="color: #111111; text-decoration: none; font-size: 16px;">📞 061 / 60-65-018</a>
+        <div class="header-phone">
+            <a href="tel:+381616065018">📞 061 / 60-65-018</a>
         </div>
     </div>
 """, unsafe_allow_html=True)
 
-# Otvaranje glavnog kontejnera ispod headera
+# Otvaranje glavnog dela stranice ispod menija
 st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
-# HERO SEKCIJA (Audi i Glavni Tekst)
-st.markdown('<div class="hero-bg">', unsafe_allow_html=True)
-st.title("AM AUTO AGENCIJA")
-st.write("Sve na jednom mestu za Vaše vozilo. Brza registracija, siguran uvoz motornih vozila i pouzdan platni promet.")
-st.markdown('</div>', unsafe_allow_html=True)
+# HERO SEKCIJA (Tekst spakovan direktno unutar pozadine sa Audijem)
+st.markdown(f"""
+    <div class="hero-bg">
+        <h1>AM AUTO AGENCIJA</h1>
+        <p>Sve na jednom mestu za Vaše vozilo. Brza registracija, siguran uvoz motornih vozila i pouzdan platni promet.</p>
+    </div>
+""", unsafe_allow_html=True)
 
 st.markdown('<br><br>', unsafe_allow_html=True)
 
 # NASLOV USLUGA
-st.markdown('<h2 style="text-align: center; font-weight: 700; color: #111111;">NAŠE USLUGE</h2>', unsafe_allow_html=True)
+st.markdown('<h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif;">NAŠE USLUGE</h2>', unsafe_allow_html=True)
 st.markdown('<div style="width: 50px; height: 3px; background-color: #E53E3E; margin: 15px auto 50px auto;"></div>', unsafe_allow_html=True)
 
-# TRI KARTICE SA USLUGAMA (Koristimo Streamlit kolone)
+# TRI KARTICE SA USLUGAMA
 col1, col2, col3 = st.columns(3)
 
 with col1:
     st.markdown("""
-        <div class="service-box box-black">
+        <div class="service-box box-black" style="font-family: sans-serif;">
             <div style="font-size: 40px; margin-bottom: 15px;">📝</div>
-            <h3 style="font-weight: 700; margin-bottom: 15px;">Registracija vozila</h3>
-            <p style="color: #666666; line-height: 1.6;">Kompletna usluga tehničkog pregleda, osiguranja i izdavanja registracionih nalepnica bez odlaska u MUP.</p>
+            <h3 style="font-weight: 700; margin-bottom: 15px; color: #111111;">Registracija vozila</h3>
+            <p style="color: #666666; line-height: 1.6; font-size: 15px;">Kompletna usluga tehničkog pregleda, osiguranja i izdavanja registracionih nalepnica bez odlaska u MUP.</p>
         </div>
     """, unsafe_allow_html=True)
 
 with col2:
     st.markdown("""
-        <div class="service-box box-red">
+        <div class="service-box box-red" style="font-family: sans-serif;">
             <div style="font-size: 40px; margin-bottom: 15px;">🚢</div>
-            <h3 style="font-weight: 700; margin-bottom: 15px;">Uvoz vozila</h3>
-            <p style="color: #666666; line-height: 1.6;">Pomoć pri odabiru, organizacija transporta, carinjenje i kompletna dokumentacija za uvoz automobila.</p>
+            <h3 style="font-weight: 700; margin-bottom: 15px; color: #111111;">Uvoz vozila</h3>
+            <p style="color: #666666; line-height: 1.6; font-size: 15px;">Pomoć pri odabiru, organizacija transporta, carinjenje i kompletna dokumentacija za uvoz automobila.</p>
         </div>
     """, unsafe_allow_html=True)
 
 with col3:
     st.markdown("""
-        <div class="service-box box-black">
+        <div class="service-box box-black" style="font-family: sans-serif;">
             <div style="font-size: 40px; margin-bottom: 15px;">💳</div>
-            <h3 style="font-weight: 700; margin-bottom: 15px;">Platni promet</h3>
-            <p style="color: #666666; line-height: 1.6;">Brzo i sigurno plaćanje svih vrsta računa, taksi i uplatnica direktno na našem šalteru.</p>
+            <h3 style="font-weight: 700; margin-bottom: 15px; color: #111111;">Platni promet</h3>
+            <p style="color: #666666; line-height: 1.6; font-size: 15px;">Brzo i sigurno plaćanje svih vrsta računa, taksi i uplatnica direktno na našem šalteru.</p>
         </div>
     """, unsafe_allow_html=True)
 
-# KONTAKT SEKCIJA NA DMU (Footer)
+# TAMNA KONTAKT SEKCIJA (Footer)
 st.markdown("""
-    <div class="contact-footer">
+    <div class="contact-footer" style="font-family: sans-serif;">
         <h2 style="font-weight: 700; margin-bottom: 10px;">KONTAKT INFORMACIJE</h2>
         <div style="width: 35px; height: 2px; background-color: #E53E3E; margin: 0 auto 40px auto;"></div>
         <p style="font-size: 17px; color: #dddddd; margin-bottom: 15px;">📍 Adresa: <strong>1. Novembar 250, LAĆARAK</strong></p>
@@ -152,5 +192,5 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-# Zatvaranje glavnog kontejnera
+# Zatvaranje glavnog dela stranice
 st.markdown('</div>', unsafe_allow_html=True)
