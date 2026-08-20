@@ -26,7 +26,7 @@ pozadina_b64 = ucitaj_sliku_base64("AMBck.JPG")
 izvor_logotipa = logo_b64 if logo_b64 else "https://placeholder.com"
 stil_pozadine = f"url('{pozadina_b64}');" if pozadina_b64 else "linear-gradient(135deg, #111111 0%, #222222 100%);"
 
-# 3. Globalni CSS stilovi sa pojačanim filmskim uvodnim efektom
+# 3. Globalni CSS stilovi
 st.markdown(f"""
     <style>
     #MainMenu {{visibility: hidden;}}
@@ -92,7 +92,7 @@ st.markdown(f"""
         align-items: center;
     }}
     
-    /* POJAČANA ANIMACIJA POZADINE (Glatki Zoom-In + Izoštravanje/Blur efekat) */
+    /* POJAČANA ANIMACIJA POZADINE */
     @keyframes advancedZoomBlur {{
         0% {{
             transform: scale(1.25);
@@ -118,7 +118,6 @@ st.markdown(f"""
         animation: advancedZoomBlur 3.2s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
     }}
     
-    /* TEKST I DUGME IZNAD POZADINE - Osiguran z-index prednji plan */
     .hero-content {{
         position: relative;
         z-index: 99;
@@ -128,7 +127,6 @@ st.markdown(f"""
         width: 100%;
     }}
     
-    /* Animacija za postepeno pojavljivanje elemenata */
     @keyframes elementsFadeIn {{
         from {{ opacity: 0; transform: translateY(20px); }}
         to {{ opacity: 1; transform: translateY(0); }}
@@ -154,7 +152,6 @@ st.markdown(f"""
         animation: elementsFadeIn 1.8s ease-out forwards;
     }}
     
-    /* Crveno dugme u prvom planu */
     .hero-btn {{
         background-color: #E53E3E;
         color: white !important;
@@ -193,11 +190,10 @@ st.markdown(f"""
         margin-top: 60px;
     }}
     
-    /* Powered by zelen, normalan i bez podebljanja */
     .powered-by {{
         font-size: 13px;
         color: #2ECC71 !important;
-        margin-top: 15px;
+        margin-top: 25px;
         letter-spacing: 1px;
         font-weight: normal !important;
     }}
@@ -221,14 +217,14 @@ st.markdown(f"""
 # Otvaranje glavnog dela stranice ispod menija
 st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
-# HERO SEKCIJA SA ANIMIRANOM POZADINOM I TEKSTOM (Dugme izvučeno napred)
+# HERO SEKCIJA SA ANIMIRANOM POZADINOM I TEKSTOM
 st.markdown(f"""
     <div class="hero-container">
         <div class="hero-background-animated"></div>
         <div class="hero-content">
             <h1><b style="font-weight: 900;">AM AUTO</b> agencija</h1>
             <p>Sve na jednom mestu za Vaše vozilo. Brza registracija, siguran uvoz motornih vozila i pouzdan platni promet.</p>
-            <a href="#kontakt" class="hero-btn">KONTAKTIRAJTE NAS</a>
+            <a href="#kalkulator-sekcija" class="hero-btn">IZRAČUNAJTE REGISTRACIJU</a>
         </div>
     </div>
 """, unsafe_allow_html=True)
@@ -269,18 +265,34 @@ with col3:
         </div>
     """, unsafe_allow_html=True)
 
-# TAMNA KONTAKT SEKCIJA
-st.markdown("""
-    <div id="kontakt" class="contact-footer" style="font-family: sans-serif;">
-        <h2 style="font-weight: 700; margin-bottom: 10px;">KONTAKT INFORMACIJE</h2>
-        <div style="width: 35px; height: 2px; background-color: #E53E3E; margin: 0 auto 40px auto;"></div>
-        <p style="font-size: 17px; color: #dddddd; margin-bottom: 15px;">📍 Adresa: <strong>1. Novembar 250, LAĆARAK</strong></p>
-        <p style="font-size: 17px; color: #dddddd; margin-bottom: 15px;">📞 Telefon: <a href="tel:+381616065018" style="color: white; text-decoration: none;"><strong>061 / 60-65-018</strong></a></p>
-        <p style="font-size: 17px; color: #dddddd; margin-bottom: 30px;">📧 Email: <a href="mailto:am.auto@gmail.com" style="color: white; text-decoration: none;"><strong>am.auto@gmail.com</strong></a></p>
-        <p style="font-size: 14px; color: #555555; margin-top: 40px;">&copy; 2026 AM AUTO. Sva prava zadržana.</p>
-        <div class="powered-by">Powered by MAGICOMP</div>
-    </div>
-""", unsafe_allow_html=True)
+st.markdown('<br><br id="kalkulator-sekcija"><br>', unsafe_allow_html=True)
 
-# Zatvaranje glavnog dela stranice
-st.markdown('</div>', unsafe_allow_html=True)
+# --- NOVA SEKCIJA: ORIJENTACIONI KALKULATOR ---
+st.markdown('<h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif;">ORIJENTACIONI KALKULATOR</h2>', unsafe_allow_html=True)
+st.markdown('<div style="width: 50px; height: 3px; background-color: #E53E3E; margin: 15px auto 30px auto;"></div>', unsafe_allow_html=True)
+
+# Centrirani prozor za kalkulator pomoću Streamlit kolona
+calc_col1, calc_col2, calc_col3 = st.columns([1, 2, 1])
+
+with calc_col2:
+    st.markdown('<div style="background-color: #f9f9f9; padding: 30px; border-radius: 8px; border: 1px solid #eeeeee; font-family: sans-serif;">', unsafe_allow_html=True)
+    
+    # Unos podataka od strane klijenta
+    kubikaza = st.selectbox("Izaberite zapreminu motora (cm³):", [
+        "Do 1150 cm³", "1150 - 1300 cm³", "1300 - 1600 cm³", 
+        "1600 - 2000 cm³", "2000 - 2500 cm³", "Preko 2500 cm³"
+    ])
+    
+    snaga = st.slider("Snaga motora (kW):", min_value=20, max_value=250, value=75)
+    
+    godiste = st.selectbox("Godište vozila:", [
+        "Novo vozilo (Prva registracija)", "Do 5 godina starosti", 
+        "5 do 10 godina starosti", "Preko 10 godina starosti"
+    ])
+    
+    st.markdown('<br>', unsafe_allow_html=True)
+    
+    # Računanje orijentacione cene kroz bazičnu Python logiku
+    cena_baza = 15000
+    if kubikaza == "1150 - 1300 cm³": cena_baza += 4000
+    elif kubikaza == "1300 - 1600 cm³": cena_baza += 8000
