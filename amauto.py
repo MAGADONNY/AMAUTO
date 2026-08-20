@@ -24,9 +24,9 @@ pozadina_b64 = ucitaj_sliku_base64("AMBck.JPG")
 
 # Rezervni plan ako slike ne postoje na serveru
 izvor_logotipa = logo_b64 if logo_b64 else "https://placeholder.com"
-stil_pozadine = f"background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.80)), url('{pozadina_b64}');" if pozadina_b64 else "background: linear-gradient(135deg, #111111 0%, #222222 100%);"
+stil_pozadine = f"url('{pozadina_b64}');" if pozadina_b64 else "linear-gradient(135deg, #111111 0%, #222222 100%);"
 
-# 3. Globalni CSS stilovi za stabilan i čist grafički prikaz
+# 3. Globalni CSS stilovi sa ugrađenom glatkom animacijom pozadine
 st.markdown(f"""
     <style>
     #MainMenu {{visibility: hidden;}}
@@ -76,40 +76,77 @@ st.markdown(f"""
         margin-top: 85px;
     }}
     
-    /* Tamna Hero sekcija sa Audijem u pozadini */
-    .hero-section {{
-        {stil_pozadine}
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat !important;
+    /* KONTEJNER ZA HERO SEKCIJU (Služi da sakrije ivice slike tokom zumiranja) */
+    .hero-container {{
+        position: relative;
         width: 100%;
-        padding: 120px 40px;
-        text-align: center;
-        color: white !important;
         min-height: 580px;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }}
     
-    /* Glavni naslov - Podrazumevano postavljen na tanak font */
-    .hero-section h1 {{
+    /* ANIMIRANA POZADINA (Glatki uvodni Zoom-In i Fade efekat) */
+    @keyframes superZoomFade {{
+        0% {{
+            transform: scale(1.15);
+            opacity: 0.3;
+        }}
+        100% {{
+            transform: scale(1.0);
+            opacity: 1;
+        }}
+    }}
+    
+    .hero-background-animated {{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.80)), {stil_pozadine}
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        z-index: 1;
+        animation: superZoomFade 3.5s ease-out forwards; /* Trajanje animacije 3.5 sekunde */
+    }}
+    
+    /* TEKST IZNAD ANIMIRANE POZADINE */
+    .hero-content {{
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: white !important;
+        padding: 40px;
+    }}
+    
+    /* Animacija za postepeno pojavljivanje teksta */
+    @keyframes textFadeIn {{
+        from {{ opacity: 0; transform: translateY(15px); }}
+        to {{ opacity: 1; transform: translateY(0); }}
+    }}
+    
+    .hero-content h1 {{
         font-size: 46px;
         font-weight: 300;
         letter-spacing: 2px;
         margin-bottom: 20px;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         color: white !important;
+        animation: textFadeIn 1.5s ease-out forwards;
     }}
     
-    .hero-section p {{
+    .hero-content p {{
         font-size: 19px;
         color: #e0e0e0 !important;
         max-width: 600px;
         margin: 0 auto 40px auto;
         line-height: 1.6;
         text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        animation: textFadeIn 2.0s ease-out forwards;
     }}
     
     /* Dugme Kontaktirajte nas */
@@ -124,6 +161,7 @@ st.markdown(f"""
         display: inline-block;
         box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4);
         transition: 0.3s;
+        animation: textFadeIn 2.5s ease-out forwards;
     }}
     .hero-btn:hover {{
         background-color: #C53030;
@@ -178,12 +216,18 @@ st.markdown(f"""
 # Otvaranje glavnog dela stranice ispod menija
 st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
-# HERO SEKCIJA (Koristi se izvorni HTML b tag za stopostotno podebljanje svuda)
+# HERO SEKCIJA SA ANIMIRANOM POZADINOM I TEKSTOM
 st.markdown(f"""
-    <div class="hero-section">
-        <h1><b style="font-weight: 900;">AM AUTO</b> agencija</h1>
-        <p>Sve na jednom mestu za Vaše vozilo. Brza registracija, siguran uvoz motornih vozila i pouzdan platni promet.</p>
-        <a href="#kontakt" class="hero-btn">KONTAKTIRAJTE NAS</a>
+    <div class="hero-container">
+        <!-- Sloj sa pozadinskom slikom koja se lagano zumira i stabilizuje -->
+        <div class="hero-background-animated"></div>
+        
+        <!-- Sloj sa tekstom i dugmetom koji se postepeno pojavljuju -->
+        <div class="hero-content">
+            <h1><b style="font-weight: 900;">AM AUTO</b> agencija</h1>
+            <p>Sve na jednom mestu za Vaše vozilo. Brza registracija, siguran uvoz motornih vozila i pouzdan platni promet.</p>
+            <a href="#kontakt" class="hero-btn">KONTAKTIRAJTE NAS</a>
+        </div>
     </div>
 """, unsafe_allow_html=True)
 
@@ -223,14 +267,14 @@ with col3:
         </div>
     """, unsafe_allow_html=True)
 
-# TAMNA KONTAKT SEKCIJA (Footer)
+# TAMNA KONTAKT SEKCIJA (Vraćen stari stabilni sistem bez eksternih linkova)
 st.markdown("""
     <div id="kontakt" class="contact-footer" style="font-family: sans-serif;">
         <h2 style="font-weight: 700; margin-bottom: 10px;">KONTAKT INFORMACIJE</h2>
         <div style="width: 35px; height: 2px; background-color: #E53E3E; margin: 0 auto 40px auto;"></div>
         <p style="font-size: 17px; color: #dddddd; margin-bottom: 15px;">📍 Adresa: <strong>1. Novembar 250, LAĆARAK</strong></p>
         <p style="font-size: 17px; color: #dddddd; margin-bottom: 15px;">📞 Telefon: <a href="tel:+381616065018" style="color: white; text-decoration: none;"><strong>061 / 60-65-018</strong></a></p>
-        <p style="font-size: 17px; color: #dddddd; margin-bottom: 30px;">📧 Email: <a href="mailto:amauto@gmail.com" style="color: white; text-decoration: none;"><strong>amauto@gmail.com</strong></a></p>
+        <p style="font-size: 17px; color: #dddddd; margin-bottom: 30px;">📧 Email: <a href="mailto:am.auto@gmail.com" style="color: white; text-decoration: none;"><strong>am.auto@gmail.com</strong></a></p>
         <p style="font-size: 14px; color: #555555; margin-top: 40px;">&copy; 2026 AM AUTO. Sva prava zadržana.</p>
         <div class="powered-by">Powered by MAGICOMP</div>
     </div>
