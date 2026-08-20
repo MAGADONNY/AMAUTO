@@ -3,7 +3,7 @@ import streamlit.components.v1 as components
 import base64
 import os
 
-# Podešavanje stranice (mora biti prva Streamlit komanda)
+# Podešavanje stranice
 st.set_page_config(
     page_title="AM AUTO - Agencija za registraciju i uvoz vozila - Laćarak",
     page_icon="🚗",
@@ -23,10 +23,10 @@ logo_base64 = get_base64_image("LOGO.JPG")
 bg_base64 = get_base64_image("AMBck.JPG")
 
 # Konfiguracija pozadina
-bg_style = f"background-image: linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.80)), url('{bg_base64}');" if bg_base64 else "background: linear-gradient(135deg, #111111 0%, #222222 100%);"
+bg_style = f"background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.70)), url('{bg_base64}');" if bg_base64 else "background: linear-gradient(135deg, #111111 0%, #222222 100%);"
 logo_src = logo_base64 if logo_base64 else "https://placeholder.com"
 
-# Kompletan HTML i CSS dizajn sa tvojim podacima
+# Kompletan HTML i CSS dizajn sa popravljenom proporcijom slike
 html_sadrzaj = f"""
 <!DOCTYPE html>
 <html lang="sr">
@@ -41,7 +41,7 @@ html_sadrzaj = f"""
             padding: 0;
         }}
         html {{
-            scroll-behavior: smooth; /* Glatko skrolovanje na klik dugmeta */
+            scroll-behavior: smooth;
         }}
         body {{
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -100,27 +100,30 @@ html_sadrzaj = f"""
             margin-top: 80px;
         }}
         
-        /* Hero sekcija sa Audijem */
+        /* Hero sekcija sa Audijem - Proporcija zaključana na celost slike */
         .hero-section {{
             {bg_style}
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat !important;
-            padding: 140px 5%;
-            text-align: center;
-            color: white;
-            min-height: 550px;
+            width: 100%;
+            padding: 100px 5%;
+            aspect-ratio: 16 / 9; /* Garantuje prikaz cele slike bez odsecanja na PC-u */
+            min-height: 580px;
+            max-height: 750px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            text-align: center;
+            color: white;
         }}
         .hero-section h1 {{
             font-size: 46px;
             font-weight: 800;
             letter-spacing: 2px;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }}
         .hero-section p {{
             font-size: 19px;
@@ -223,7 +226,23 @@ html_sadrzaj = f"""
         .copyright {{ 
             font-size: 14px; 
             color: #555555; 
-            margin-top: 50px; 
+            margin-top: 40px; 
+        }}
+        .powered-by {{
+            font-size: 13px;
+            color: #E53E3E;
+            margin-top: 8px;
+            letter-spacing: 1px;
+        }}
+        
+        /* Responzivnost za mobilne telefone */
+        @media (max-width: 768px) {{
+            .hero-section {{
+                aspect-ratio: auto;
+                min-height: 480px;
+            }}
+            .hero-section h1 {{ font-size: 32px; }}
+            .hero-section p {{ font-size: 16px; }}
         }}
     </style>
 </head>
@@ -239,7 +258,7 @@ html_sadrzaj = f"""
         </div>
     </div>
 
-    <!-- GLAVNI SADRŽAJ SA SAČUVANIM ANIMACIJAMA -->
+    <!-- GLAVNI SADRŽAJ -->
     <div class="main-body animated-content">
         <div class="hero-section">
             <h1>AM AUTO AGENCIJA</h1>
@@ -271,7 +290,7 @@ html_sadrzaj = f"""
             </div>
         </div>
         
-        <!-- KONTAKT SEKCIJA SA TVOJIM PODACIMA -->
+        <!-- KONTAKT SEKCIJA -->
         <div id="kontakt" class="footer-section">
             <h2>KONTAKT INFORMACIJE</h2>
             <div class="footer-divider"></div>
@@ -286,21 +305,3 @@ html_sadrzaj = f"""
                 📧 Email: <a href="mailto:amauto@gmail.com"><strong>amauto@gmail.com</strong></a>
             </div>
             
-            <p class="copyright">&copy; 2026 AM AUTO. Sva prava zadržana.</p>
-        </div>
-    </div>
-
-</body>
-</html>
-"""
-
-# Sređivanje Streamlit okruženja
-st.markdown("""
-    <style>
-    .block-container { padding: 0px !important; }
-    iframe { border: none !important; }
-    </style>
-""", unsafe_allow_html=True)
-
-# Prikazivanje sajta na serveru
-components.html(html_sadrzaj, height=1250, scrolling=True)
