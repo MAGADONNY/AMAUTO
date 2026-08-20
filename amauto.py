@@ -1,6 +1,6 @@
 import streamlit as st
 
-# 1. Podešavanje stranice
+# Podešavanje stranice (mora biti prva Streamlit komanda)
 st.set_page_config(
     page_title="AM AUTO - Agencija za registraciju i uvoz vozila - Laćarak",
     page_icon="🚗",
@@ -8,261 +8,131 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Globalni CSS stilovi za sakrivanje Streamlit elemenata i aktivaciju animacije
+# Sakrivanje standardnih Streamlit elemenata i definisanje stilova
 st.markdown("""
     <style>
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
-    
     .block-container {
-        padding: 0px !important;
+        padding-top: 0rem;
+        padding-bottom: 0rem;
+        padding-left: 0rem;
+        padding-right: 0rem;
     }
     
+    /* Glavna uvodna animacija (Fade In + Slide Up) */
     @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(25px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    .animated-content {
-        animation: fadeInUp 1.2s ease-out forwards;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
     
+    .animated-content {
+        animation: fadeInUp 1.4s ease-out forwards;
+    }
+    
+    /* CSS za fiksirani beli header */
     .custom-header {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         background-color: #ffffff;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-        z-index: 99999;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        z-index: 9999;
         padding: 10px 5%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: 80px;
     }
+    
     .logo-container img {
-        height: 60px;
+        height: 65px;
         width: auto;
     }
-    .header-phone a {
-        color: #111111;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 16px;
-    }
-    .header-phone a:hover {
-        color: #E53E3E;
-    }
     
-    .main-body-wrapper {
-        margin-top: 80px;
-    }
-    
-    .hero-section {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.70)), url('https://githubusercontent.com');
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-        width: 100%;
-        padding: 140px 5%;
-        min-height: 580px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        color: white;
-    }
-    .hero-section h1 {
-        font-size: 46px;
-        font-weight: 800;
-        letter-spacing: 2px;
-        margin-bottom: 20px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-    }
-    .hero-section p {
-        font-size: 19px;
-        color: #e0e0e0;
-        max-width: 600px;
-        margin: 0 auto 40px auto;
-        line-height: 1.6;
-        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-    }
-    .hero-btn {
-        background-color: #E53E3E;
-        color: white;
-        padding: 16px 40px;
-        font-weight: bold;
-        text-decoration: none;
-        border-radius: 4px;
-        letter-spacing: 1px;
-        display: inline-block;
-        box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4);
-        transition: 0.3s;
-    }
-    .hero-btn:hover {
-        background-color: #C53030;
-        transform: translateY(-2px);
-    }
-    
-    .services-section {
-        padding: 80px 5%;
-        background-color: #ffffff;
-        text-align: center;
-    }
-    .services-section h2 {
-        font-size: 30px;
-        font-weight: 700;
-        color: #111111;
-        margin-bottom: 10px;
-    }
-    .title-divider {
-        width: 50px;
-        height: 3px;
-        background-color: #E53E3E;
-        margin: 0 auto 50px auto;
-    }
-    .services-grid {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 30px;
-    }
-    .service-card {
-        flex: 1;
-        min-width: 280px;
-        max-width: 350px;
-        padding: 40px 25px;
-        background: #f9f9f9;
-        border-radius: 4px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-    }
-    .card-black { border-top: 4px solid #111111; }
-    .card-red { border-top: 4px solid #E53E3E; }
-    
-    .card-icon { font-size: 40px; margin-bottom: 15px; }
-    .service-card h3 { font-size: 20px; font-weight: 700; color: #111111; margin-bottom: 15px; }
-    .service-card p { color: #666666; font-size: 15px; line-height: 1.6; }
-    
-    .footer-section {
-        background-color: #111111;
-        color: white;
-        padding: 70px 5%;
-        text-align: center;
-    }
-    .footer-section h2 { 
-        font-size: 28px; 
-        font-weight: 700; 
-        margin-bottom: 10px; 
-        letter-spacing: 1px;
-    }
-    .footer-divider {
-        width: 35px;
-        height: 2px;
-        background-color: #E53E3E;
-        margin: 0 auto 40px auto;
-    }
-    .contact-item {
-        font-size: 17px;
-        color: #dddddd;
-        margin-bottom: 15px;
-    }
-    .contact-item a {
-        color: #ffffff;
-        text-decoration: none;
-        font-weight: bold;
-        transition: 0.3s;
-    }
-    .contact-item a:hover {
-        color: #E53E3E;
-    }
-    .copyright { 
-        font-size: 14px; 
-        color: #555555; 
-        margin-top: 40px; 
-    }
-    .powered-by {
-        font-size: 13px;
-        color: #E53E3E;
-        margin-top: 10px;
-        letter-spacing: 2px;
-        font-weight: bold;
-    }
-    
-    @media (max-width: 768px) {
-        .hero-section { min-height: 480px; padding: 100px 20px; }
-        .hero-section h1 { font-size: 32px; }
-        .hero-section p { font-size: 16px; }
-        .custom-header { padding: 10px 20px; }
+    /* Pomak sadržaja nadole da ga header ne bi pokrio */
+    .main-body {
+        margin-top: 85px;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# 3. Prikazivanje strukture sajta direktno na ekranu
-st.markdown("""
-    <!-- BELI HEADER SA LOGOOM -->
+# --- TAČNE PUTANJE SA TVOG GITHUB-A ---
+LOGO_URL = "https://githubusercontent.com"
+BACKGROUND_URL = "https://githubusercontent.com"
+
+# Prikaz belog headera sa tvog GitHub-a
+st.markdown(f"""
     <div class="custom-header">
         <div class="logo-container">
-            <img src="https://githubusercontent.com" alt="AM AUTO Logo" onerror="this.onerror=null; this.src='https://placeholder.com';">
+            <img src="{LOGO_URL}" alt="AM AUTO Logo" onerror="this.onerror=null; this.src='https://placeholder.com';">
         </div>
-        <div class="header-phone">
-            <a href="tel:+381616065018">📞 061 / 60-65-018</a>
+        <div style="font-family: sans-serif; font-weight: bold; color: #111111;">
+            <a href="tel:+381616065018" style="color: #111111; text-decoration: none; font-size: 16px;">📞 061 / 60-65-018</a>
         </div>
     </div>
+""", unsafe_allow_html=True)
 
-    <!-- GLAVNI SADRŽAJ SA ANIMACIJOM -->
-    <div class="main-body-wrapper animated-content">
+# Glavni sadržaj stranice sa uvodnom animacijom i Audijem u pozadini
+st.markdown(f"""
+    <div class="main-body animated-content" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
         
-        <!-- HERO SEKCIJA SA AUDIJEM U POZADINI -->
-        <div class="hero-section">
-            <h1>AM AUTO AGENCIJA</h1>
-            <p>Sve na jednom mestu za Vaše vozilo. Brza registracija, siguran uvoz motornih vozila i pouzdan platni promet.</p>
-            <a href="#kontakt" class="hero-btn">KONTAKTIRAJTE NAS</a>
+        <!-- HERO SEKCIJA SA TVOJOM SLIKOM AMBck.JPG -->
+        <div style="background-color: #1a1a1a; background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.70)), url('{BACKGROUND_URL}'); background-size: cover; background-position: center; padding: 140px 5%; text-align: center; color: white; min-height: 550px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <h1 style="font-size: 46px; font-weight: 800; letter-spacing: 2px; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
+                AM AUTO AGENCIJA
+            </h1>
+            <p style="font-size: 19px; color: #e0e0e0; max-width: 600px; margin: 0 auto 40px auto; line-height: 1.6; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">
+                Sve na jednom mestu za Vaše vozilo. Brza registracija, siguran uvoz motornih vozila i pouzdan platni promet.
+            </p>
+            <a href="#kontakt" style="background-color: #E53E3E; color: white; padding: 16px 40px; font-weight: bold; text-decoration: none; border-radius: 4px; letter-spacing: 1px; display: inline-block; box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4);">
+                KONTAKTIRAJTE NAS
+            </a>
         </div>
         
-        <!-- SEKCIJA SA USLUGAMA -->
-        <div class="services-section">
-            <h2>NAŠE USLUGE</h2>
-            <div class="title-divider"></div>
+        <!-- SEKCIJA USLUGE -->
+        <div style="padding: 80px 5%; background-color: #ffffff; text-align: center;">
+            <h2 style="font-size: 30px; font-weight: 700; color: #111111; margin-bottom: 10px;">NAŠE USLUGE</h2>
+            <div style="width: 50px; height: 3px; background-color: #E53E3E; margin: 0 auto 50px auto;"></div>
             
-            <div class="services-grid">
-                <div class="service-card card-black">
-                    <div class="card-icon">📝</div>
-                    <h3>Registracija vozila</h3>
-                    <p>Kompletna usluga tehničkog pregleda, osiguranja i izdavanja registracionih nalepnica bez odlaska u MUP.</p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+                <!-- Kartica 1 -->
+                <div style="flex: 1; min-width: 280px; max-width: 350px; padding: 40px 25px; background: #f9f9f9; border-top: 4px solid #111111; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                    <div style="font-size: 40px; margin-bottom: 15px;">📝</div>
+                    <h3 style="font-size: 20px; font-weight: 700; color: #111111; margin-bottom: 15px;">Registracija vozila</h3>
+                    <p style="color: #666666; font-size: 15px; line-height: 1.6;">Kompletna usluga tehničkog pregleda, osiguranja i izdavanja registracionih nalepnica bez odlaska u MUP.</p>
                 </div>
-                <div class="service-card card-red">
-                    <div class="card-icon">🚢</div>
-                    <h3>Uvoz vozila</h3>
-                    <p>Pomoć pri odabiru, organizacija transporta, carinjenje i kompletna dokumentacija za uvoz automobila.</p>
+                <!-- Kartica 2 -->
+                <div style="flex: 1; min-width: 280px; max-width: 350px; padding: 40px 25px; background: #f9f9f9; border-top: 4px solid #E53E3E; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                    <div style="font-size: 40px; margin-bottom: 15px;">🚢</div>
+                    <h3 style="font-size: 20px; font-weight: 700; color: #111111; margin-bottom: 15px;">Uvoz vozila</h3>
+                    <p style="color: #666666; font-size: 15px; line-height: 1.6;">Pomoć pri odabiru, organizacija transporta, carinjenje i kompletna dokumentacija za uvoz automobila.</p>
                 </div>
-                <div class="service-card card-black">
-                    <div class="card-icon">💳</div>
-                    <h3>Platni promet</h3>
-                    <p>Brzo i sigurno plaćanje svih vrsta računa, taksi i uplatnica direktno na našem šalteru.</p>
+                <!-- Kartica 3 -->
+                <div style="flex: 1; min-width: 280px; max-width: 350px; padding: 40px 25px; background: #f9f9f9; border-top: 4px solid #111111; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                    <div style="font-size: 40px; margin-bottom: 15px;">💳</div>
+                    <h3 style="font-size: 20px; font-weight: 700; color: #111111; margin-bottom: 15px;">Platni promet</h3>
+                    <p style="color: #666666; font-size: 15px; line-height: 1.6;">Brzo i sigurno plaćanje svih vrsta računa, taksi i uplatnica direktno na našem šalteru.</p>
                 </div>
             </div>
         </div>
         
-        <!-- KONTAKT SEKCIJA SA PODACIMA I POTPISOM -->
-        <div id="kontakt" class="footer-section">
-            <h2>KONTAKT INFORMACIJE</h2>
-            <div class="footer-divider"></div>
+        <!-- KONTAKT SEKCIJA SA PODACIMA -->
+        <div id="kontakt" style="background-color: #111111; color: white; padding: 60px 5%; text-align: center;">
+            <h2 style="font-size: 26px; font-weight: 700; margin-bottom: 30px;">KONTAKT INFORMACIJE</h2>
+            <p style="font-size: 17px; color: #aaaaaa; margin-bottom: 12px;">📍 Adresa: <strong>1. Novembar 250, LAĆARAK</strong></p>
+            <p style="font-size: 17px; color: #aaaaaa; margin-bottom: 12px;">📞 Telefon: <a href="tel:+381616065018" style="color: white; text-decoration: none;"><strong>061 / 60-65-018</strong></a></p>
+            <p style="font-size: 17px; color: #aaaaaa; margin-bottom: 30px;">📧 Email: <a href="mailto:amauto@gmail.com" style="color: white; text-decoration: none;"><strong>amauto@gmail.com</strong></a></p>
             
-            <div class="contact-item">
-                📍 Adresa: <strong>1. Novembar 250, LAĆARAK</strong>
-            </div>
-            <div class="contact-item">
-                📞 Telefon: <a href="tel:+381616065018"><strong>061 / 60-65-018</strong></a>
-            </div>
-            <div class="contact-item">
-                📧 Email: <a href="mailto:amauto@gmail.com"><strong>amauto@gmail.com</strong></a>
-            </div>
-            
-            <p class="copyright">&copy; 2026 AM AUTO. Sva prava zadržana.</p>
-            <div class="powered-by">Powered by MAGICOMP</div>
+            <p style="font-size: 14px; color: #555555; margin-top: 40px;">&copy; 2026 AM AUTO. Sva prava zadržana.</p>
+            <p style="font-size: 13px; color: #E53E3E; margin-top: 5px; font-weight: bold; letter-spacing: 1px;">Powered by MAGICOMP</p>
         </div>
         
     </div>
