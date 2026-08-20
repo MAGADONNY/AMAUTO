@@ -3,15 +3,15 @@ import streamlit.components.v1 as components
 import base64
 import os
 
-# Podešavanje stranice
+# Podešavanje stranice (mora biti prva Streamlit komanda)
 st.set_page_config(
-    page_title="AM AUTO - Agencija za registraciju i uvoz vozila",
+    page_title="AM AUTO - Agencija za registraciju i uvoz vozila - Laćarak",
     page_icon="🚗",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# Funkcija za bezbedno pretvaranje lokalne slike u format koji sajt može da pročita
+# Funkcija za bezbedno pretvaranje lokalne slike u Base64 format
 def get_base64_image(image_path):
     if os.path.exists(image_path):
         with open(image_path, "rb") as img_file:
@@ -22,23 +22,26 @@ def get_base64_image(image_path):
 logo_base64 = get_base64_image("LOGO.JPG")
 bg_base64 = get_base64_image("AMBck.JPG")
 
-# Ako slika ne postoji, koristi se rezervni moderni gradijent
-bg_style = f"background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.75)), url('{bg_base64}');" if bg_base64 else "background: linear-gradient(135deg, #111111 0%, #222222 100%);"
+# Konfiguracija pozadina
+bg_style = f"background-image: linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.80)), url('{bg_base64}');" if bg_base64 else "background: linear-gradient(135deg, #111111 0%, #222222 100%);"
 logo_src = logo_base64 if logo_base64 else "https://placeholder.com"
 
-# Kompletan HTML i CSS dizajn
+# Kompletan HTML i CSS dizajn sa tvojim podacima
 html_sadrzaj = f"""
 <!DOCTYPE html>
 <html lang="sr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AM AUTO</title>
+    <title>AM AUTO - Laćarak</title>
     <style>
         * {{
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }}
+        html {{
+            scroll-behavior: smooth; /* Glatko skrolovanje na klik dugmeta */
         }}
         body {{
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -47,13 +50,13 @@ html_sadrzaj = f"""
             overflow-x: hidden;
         }}
         
-        /* Uvodna animacija */
+        /* Glavna uvodna animacija */
         @keyframes fadeInUp {{
-            from {{ opacity: 0; transform: translateY(30px); }}
+            from {{ opacity: 0; transform: translateY(20px); }}
             to {{ opacity: 1; transform: translateY(0); }}
         }}
         .animated-content {{
-            animation: fadeInUp 1.4s ease-out forwards;
+            animation: fadeInUp 1.2s ease-out forwards;
         }}
         
         /* Fiksirani beli header */
@@ -65,33 +68,44 @@ html_sadrzaj = f"""
             background-color: #ffffff;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             z-index: 9999;
-            padding: 10px 5%;
+            padding: 5px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 80px;
+        }}
+        .logo-container {{
+            display: flex;
+            align-items: center;
+            height: 100%;
         }}
         .logo-container img {{
-            height: 65px;
+            height: 60px;
             width: auto;
+            object-fit: contain;
         }}
         .header-phone a {{
             color: #111111;
             text-decoration: none;
             font-weight: bold;
             font-size: 16px;
+            transition: 0.3s;
+        }}
+        .header-phone a:hover {{
+            color: #E53E3E;
         }}
         
         /* Sadržaj ispod headera */
         .main-body {{
-            margin-top: 85px;
+            margin-top: 80px;
         }}
         
         /* Hero sekcija sa Audijem */
         .hero-section {{
             {bg_style}
             background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background-position: center center;
+            background-repeat: no-repeat !important;
             padding: 140px 5%;
             text-align: center;
             color: white;
@@ -127,6 +141,10 @@ html_sadrzaj = f"""
             display: inline-block;
             box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4);
             transition: 0.3s;
+        }}
+        .hero-btn:hover {{
+            background-color: #C53030;
+            transform: translateY(-2px);
         }}
         
         /* Sekcija usluga */
@@ -173,25 +191,55 @@ html_sadrzaj = f"""
         .footer-section {{
             background-color: #111111;
             color: white;
-            padding: 60px 5%;
+            padding: 70px 5%;
             text-align: center;
         }}
-        .footer-section h2 {{ font-size: 26px; font-weight: 700; margin-bottom: 30px; }}
-        .footer-section p {{ font-size: 16px; color: #aaaaaa; margin-bottom: 10px; }}
-        .copyright {{ font-size: 14px; color: #555555; margin-top: 40px; }}
+        .footer-section h2 {{ 
+            font-size: 28px; 
+            font-weight: 700; 
+            margin-bottom: 10px; 
+            letter-spacing: 1px;
+        }}
+        .footer-divider {{
+            width: 35px;
+            height: 2px;
+            background-color: #E53E3E;
+            margin: 0 auto 40px auto;
+        }}
+        .contact-item {{
+            font-size: 17px;
+            color: #dddddd;
+            margin-bottom: 15px;
+        }}
+        .contact-item a {{
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }}
+        .contact-item a:hover {{
+            color: #E53E3E;
+        }}
+        .copyright {{ 
+            font-size: 14px; 
+            color: #555555; 
+            margin-top: 50px; 
+        }}
     </style>
 </head>
 <body>
 
+    <!-- HEADER SA LOGOOM I PODACIMA -->
     <div class="custom-header">
         <div class="logo-container">
             <img src="{logo_src}" alt="AM AUTO Logo">
         </div>
         <div class="header-phone">
-            <a href="tel:+381601234567">📞 060 / 123-4567</a>
+            <a href="tel:+381616065018">📞 061 / 60-65-018</a>
         </div>
     </div>
 
+    <!-- GLAVNI SADRŽAJ SA SAČUVANIM ANIMACIJAMA -->
     <div class="main-body animated-content">
         <div class="hero-section">
             <h1>AM AUTO AGENCIJA</h1>
@@ -199,6 +247,7 @@ html_sadrzaj = f"""
             <a href="#kontakt" class="hero-btn">KONTAKTIRAJTE NAS</a>
         </div>
         
+        <!-- NAŠE USLUGE -->
         <div class="services-section">
             <h2>NAŠE USLUGE</h2>
             <div class="title-divider"></div>
@@ -212,7 +261,7 @@ html_sadrzaj = f"""
                 <div class="service-card card-red">
                     <div class="card-icon">🚢</div>
                     <h3>Uvoz vozila</h3>
-                    <p>Pomoć pri odabiru, organization transporta, carinjenje i kompletna dokumentacija za uvoz automobila.</p>
+                    <p>Pomoć pri odabiru, organizacija transporta, carinjenje i kompletna dokumentacija za uvoz automobila.</p>
                 </div>
                 <div class="service-card card-black">
                     <div class="card-icon">💳</div>
@@ -222,10 +271,21 @@ html_sadrzaj = f"""
             </div>
         </div>
         
+        <!-- KONTAKT SEKCIJA SA TVOJIM PODACIMA -->
         <div id="kontakt" class="footer-section">
             <h2>KONTAKT INFORMACIJE</h2>
-            <p>📍 Adresa: [Unesi tvoju adresu ovde]</p>
-            <p>📧 Email: info@amauto.rs</p>
+            <div class="footer-divider"></div>
+            
+            <div class="contact-item">
+                📍 Adresa: <strong>1. Novembar 250, LAĆARAK</strong>
+            </div>
+            <div class="contact-item">
+                📞 Telefon: <a href="tel:+381616065018"><strong>061 / 60-65-018</strong></a>
+            </div>
+            <div class="contact-item">
+                📧 Email: <a href="mailto:amauto@gmail.com"><strong>amauto@gmail.com</strong></a>
+            </div>
+            
             <p class="copyright">&copy; 2026 AM AUTO. Sva prava zadržana.</p>
         </div>
     </div>
@@ -234,7 +294,7 @@ html_sadrzaj = f"""
 </html>
 """
 
-# Sredivanje margina u Streamlit-u
+# Sređivanje Streamlit okruženja
 st.markdown("""
     <style>
     .block-container { padding: 0px !important; }
@@ -242,5 +302,5 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Prikaz gotovog sajta
-components.html(html_sadrzaj, height=1100, scrolling=True)
+# Prikazivanje sajta na serveru
+components.html(html_sadrzaj, height=1250, scrolling=True)
