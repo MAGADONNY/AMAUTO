@@ -235,7 +235,7 @@ st.markdown("""
         <div style="width: 35px; height: 2px; background-color: #E53E3E; margin: 0 auto 40px auto;"></div>
         <p style="font-size: 17px; color: #dddddd; margin-bottom: 15px;">📍 Adresa: <strong>1. Novembar 250, LAĆARAK</strong></p>
         <p style="font-size: 17px; color: #dddddd; margin-bottom: 15px;">📞 Telefon: <a href="tel:+381616065018" style="color: white; text-decoration: none;"><strong>061 / 60-65-018</strong></a></p>
-        <p style="font-size: 17px; color: #dddddd; margin-bottom: 30px;">📧 Email: <a href="mailto:amauto@gmail.com" style="color: white; text-decoration: none;"><strong>amauto@gmail.com</strong></a></p>
+        <p style="font-size: 17px; color: #dddddd; margin-bottom: 30px;">📧 Email: <a href="mailto:am.auto@gmail.com" style="color: white; text-decoration: none;"><strong>amauto@gmail.com</strong></a></p>
         <p style="font-size: 14px; color: #555555; margin-top: 40px;">&copy; 2026 AM AUTO. Sva prava zadržana.</p>
         <div class="powered-by">Powered by MAGICOMP</div>
     </div>
