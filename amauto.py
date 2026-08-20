@@ -96,7 +96,7 @@ st.markdown(f"""
     /* Glavni naslov - Podrazumevano postavljen na tanak font */
     .hero-section h1 {{
         font-size: 46px;
-        font-weight: 300 !important;
+        font-weight: 300;
         letter-spacing: 2px;
         margin-bottom: 20px;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
@@ -178,10 +178,10 @@ st.markdown(f"""
 # Otvaranje glavnog dela stranice ispod menija
 st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
-# HERO SEKCIJA (Direktno forsirano podebljanje preko inline stila za PC pretraživače)
+# HERO SEKCIJA (Koristi se izvorni HTML b tag za stopostotno podebljanje svuda)
 st.markdown(f"""
     <div class="hero-section">
-        <h1><span style="font-weight: 900 !important;">AM AUTO</span> agencija</h1>
+        <h1><b style="font-weight: 900;">AM AUTO</b> agencija</h1>
         <p>Sve na jednom mestu za Vaše vozilo. Brza registracija, siguran uvoz motornih vozila i pouzdan platni promet.</p>
         <a href="#kontakt" class="hero-btn">KONTAKTIRAJTE NAS</a>
     </div>
