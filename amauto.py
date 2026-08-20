@@ -26,9 +26,6 @@ pozadina_b64 = ucitaj_sliku_base64("AMBck.JPG")
 izvor_logotipa = logo_b64 if logo_b64 else "https://placeholder.com"
 stil_pozadine = f"background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.80)), url('{pozadina_b64}');" if pozadina_b64 else "background: linear-gradient(135deg, #111111 0%, #222222 100%);"
 
-# ČIST I UNIVERZALAN LINK ZA GOOGLE MAPE (Bezbedan za Streamlit filtere)
-MAPS_URL = "https://google.com"
-
 # 3. Globalni CSS stilovi za stabilan i čist grafički prikaz
 st.markdown(f"""
     <style>
@@ -181,12 +178,12 @@ st.markdown(f"""
 # Otvaranje glavnog dela stranice ispod menija
 st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
-# HERO SEKCIJA (Dugme otvara fabričku Google Maps navigaciju)
+# HERO SEKCIJA (Koristi se izvorni HTML b tag za stopostotno podebljanje svuda)
 st.markdown(f"""
     <div class="hero-section">
         <h1><b style="font-weight: 900;">AM AUTO</b> agencija</h1>
         <p>Sve na jednom mestu za Vaše vozilo. Brza registracija, siguran uvoz motornih vozila i pouzdan platni promet.</p>
-        <a href="{MAPS_URL}" target="_blank" class="hero-btn">PRONAĐITE NAS</a>
+        <a href="#kontakt" class="hero-btn">KONTAKTIRAJTE NAS</a>
     </div>
 """, unsafe_allow_html=True)
 
@@ -226,16 +223,14 @@ with col3:
         </div>
     """, unsafe_allow_html=True)
 
-# TAMNA KONTAKT SEKCIJA 
-st.markdown(f"""
+# TAMNA KONTAKT SEKCIJA (Footer)
+st.markdown("""
     <div id="kontakt" class="contact-footer" style="font-family: sans-serif;">
         <h2 style="font-weight: 700; margin-bottom: 10px;">KONTAKT INFORMACIJE</h2>
         <div style="width: 35px; height: 2px; background-color: #E53E3E; margin: 0 auto 40px auto;"></div>
-        <p style="font-size: 17px; color: #dddddd; margin-bottom: 15px;">
-            📍 Adresa: <a href="{MAPS_URL}" target="_blank" style="color: white; text-decoration: underline;"><strong>1. Novembar 250, LAĆARAK</strong></a>
-        </p>
+        <p style="font-size: 17px; color: #dddddd; margin-bottom: 15px;">📍 Adresa: <strong>1. Novembar 250, LAĆARAK</strong></p>
         <p style="font-size: 17px; color: #dddddd; margin-bottom: 15px;">📞 Telefon: <a href="tel:+381616065018" style="color: white; text-decoration: none;"><strong>061 / 60-65-018</strong></a></p>
-        <p style="font-size: 17px; color: #dddddd; margin-bottom: 30px;">📧 Email: <a href="mailto:am.auto@gmail.com" style="color: white; text-decoration: none;"><strong>am.auto@gmail.com</strong></a></p>
+        <p style="font-size: 17px; color: #dddddd; margin-bottom: 30px;">📧 Email: <a href="mailto:amauto@gmail.com" style="color: white; text-decoration: none;"><strong>amauto@gmail.com</strong></a></p>
         <p style="font-size: 14px; color: #555555; margin-top: 40px;">&copy; 2026 AM AUTO. Sva prava zadržana.</p>
         <div class="powered-by">Powered by MAGICOMP</div>
     </div>
