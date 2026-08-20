@@ -26,7 +26,7 @@ pozadina_b64 = ucitaj_sliku_base64("AMBck.JPG")
 izvor_logotipa = logo_b64 if logo_b64 else "https://placeholder.com"
 stil_pozadine = f"url('{pozadina_b64}');" if pozadina_b64 else "linear-gradient(135deg, #111111 0%, #222222 100%);"
 
-# 3. Globalni CSS stilovi
+# 3. Globalni CSS stilovi za stabilan i čist grafički prikaz
 st.markdown(f"""
     <style>
     #MainMenu {{visibility: hidden;}}
@@ -202,7 +202,7 @@ st.markdown(f"""
 
 # 4. IZGRADNJA SAJTA
 
-# Prikaz belog headera sa logoom i telefonom
+# Prikaz bazičnog headera sa logoom i telefonom
 st.markdown(f"""
     <div class="custom-header">
         <div class="logo-container">
@@ -293,4 +293,3 @@ with layout_col2:
     with field_col3:
         godiste = st.selectbox("Godište vozila:", [
             "Novo vozilo", "Do 5 godina", 
-            "5 do 10 godina", "Preko 10 godina"
