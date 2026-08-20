@@ -26,7 +26,7 @@ pozadina_b64 = ucitaj_sliku_base64("AMBck.JPG")
 izvor_logotipa = logo_b64 if logo_b64 else "https://placeholder.com"
 stil_pozadine = f"background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.80)), url('{pozadina_b64}');" if pozadina_b64 else "background: linear-gradient(135deg, #111111 0%, #222222 100%);"
 
-# PROVEREN I SIGURAN GOOGLE MAPS LINK (Otvara direktnu lokaciju i navigaciju u Laćarku)
+# ČIST I UNIVERZALAN LINK ZA GOOGLE MAPE (Bezbedan za Streamlit filtere)
 MAPS_URL = "https://google.com"
 
 # 3. Globalni CSS stilovi za stabilan i čist grafički prikaz
@@ -226,7 +226,7 @@ with col3:
         </div>
     """, unsafe_allow_html=True)
 
-# TAMNA KONTAKT SEKCIJA (Ispravljen email u am.auto@gmail.com)
+# TAMNA KONTAKT SEKCIJA 
 st.markdown(f"""
     <div id="kontakt" class="contact-footer" style="font-family: sans-serif;">
         <h2 style="font-weight: 700; margin-bottom: 10px;">KONTAKT INFORMACIJE</h2>
