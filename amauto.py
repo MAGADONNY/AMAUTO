@@ -10,7 +10,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Funkcija za pretvaranje lokalnih fajlova sa GitHub-a u bezbedan Base64 format
+# 2. Funkcija za pretvaranje slika u bezbedan format
 def ucitaj_sliku_base64(putanja_slike):
     if os.path.exists(putanja_slike):
         with open(putanja_slike, "rb") as fajl:
@@ -18,15 +18,13 @@ def ucitaj_sliku_base64(putanja_slike):
             return "data:image/jpeg;base64," + base64.b64encode(podaci).decode()
     return ""
 
-# Učitavanje tvog logotipa i pozadine sa Audijem iz tvog repozitorijuma
 logo_b64 = ucitaj_sliku_base64("LOGO.JPG")
 pozadina_b64 = ucitaj_sliku_base64("AMBck.JPG")
 
-# Rezervni plan ako slike ne postoje na serveru
 izvor_logotipa = logo_b64 if logo_b64 else "https://placeholder.com"
 stil_pozadine = f"url('{pozadina_b64}');" if pozadina_b64 else "linear-gradient(135deg, #111111 0%, #222222 100%);"
 
-# 3. Globalni CSS stilovi za stabilan i čist grafički prikaz
+# 3. Globalni CSS stilovi za stabilan raspored i filmsku animaciju pozadine
 st.markdown(f"""
     <style>
     #MainMenu {{visibility: hidden;}}
@@ -42,7 +40,6 @@ st.markdown(f"""
         scroll-behavior: smooth;
     }}
     
-    /* Fiksirani beli header na vrhu ekrana */
     .custom-header {{
         position: fixed;
         top: 0;
@@ -75,12 +72,10 @@ st.markdown(f"""
         color: #E53E3E;
     }}
     
-    /* Pomak celog sadržaja nadole zbog fiksiranog menija */
     .main-content {{
         margin-top: 85px;
     }}
     
-    /* KONTEJNER ZA HERO SEKCIJU */
     .hero-container {{
         position: relative;
         width: 100%;
@@ -92,7 +87,6 @@ st.markdown(f"""
         align-items: center;
     }}
     
-    /* ANIMACIJA POZADINE */
     @keyframes advancedZoomBlur {{
         0% {{
             transform: scale(1.25);
@@ -170,7 +164,6 @@ st.markdown(f"""
         transform: translateY(-2px);
     }}
     
-    /* Stilizacija kartica sa uslugama */
     .service-box {{
         background-color: #f9f9f9;
         padding: 40px 25px;
@@ -181,7 +174,57 @@ st.markdown(f"""
     .box-black {{ border-top: 4px solid #111111; }}
     .box-red {{ border-top: 4px solid #E53E3E; }}
     
-    /* Kontakt sekcija na dnu (Footer) */
+    /* Kalkulator - Kompaktan horizontalni boks sužen na 50% ekrana */
+    .calculator-container {{
+        background-color: #f9f9f9;
+        border: 1px solid #eeeeee;
+        border-radius: 6px;
+        padding: 25px;
+        max-width: 650px;
+        margin: 0 auto;
+    }}
+    .calc-row {{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 20px;
+    }}
+    .calc-field {{
+        flex: 1;
+        min-width: 140px;
+    }}
+    .calc-field label {{
+        display: block;
+        font-size: 13px;
+        color: #333333;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }}
+    .calc-field select {{
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        background-color: white;
+        font-size: 14px;
+    }}
+    .calc-submit-btn {{
+        width: 100%;
+        background-color: #E53E3E;
+        color: white;
+        border: none;
+        padding: 14px;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        letter-spacing: 1px;
+        transition: 0.3s;
+    }}
+    .calc-submit-btn:hover {{
+        background-color: #C53030;
+    }}
+    
     .contact-footer {{
         background-color: #111111;
         color: white;
@@ -189,11 +232,20 @@ st.markdown(f"""
         text-align: center;
         margin-top: 60px;
     }}
+    .footer-layout {{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 40px;
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: left;
+    }}
     
     .powered-by {{
         font-size: 13px;
         color: #2ECC71 !important;
-        margin-top: 15px;
+        margin-top: 25px;
         letter-spacing: 1px;
         font-weight: normal !important;
     }}
@@ -202,7 +254,7 @@ st.markdown(f"""
 
 # 4. IZGRADNJA SAJTA
 
-# Prikaz bazičnog headera sa logoom i telefonom
+# Zaglavlje
 st.markdown(f"""
     <div class="custom-header">
         <div class="logo-container">
@@ -214,82 +266,42 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# Otvaranje glavnog dela stranice ispod menija
 st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
-# HERO SEKCIJA SA ANIMIRANOM POZADINOM I TEKSTOM
+# Uvodni deo sa Audijem
 st.markdown(f"""
     <div class="hero-container">
         <div class="hero-background-animated"></div>
         <div class="hero-content">
             <h1><b style="font-weight: 900;">AM AUTO</b> agencija</h1>
             <p>Sve na jednom mestu za Vaše vozilo. Brza registracija, siguran uvoz motornih vozila i pouzdan platni promet.</p>
-            <a href="#kalkulator-sekcija" class="hero-btn">IZRAČUNAJTE REGISTRACIJU</a>
+            <a href="#kalkulator-zona" class="hero-btn">IZRAČUNAJTE REGISTRACIJU</a>
         </div>
     </div>
 """, unsafe_allow_html=True)
 
 st.markdown('<br><br>', unsafe_allow_html=True)
 
-# NASLOV USLUGA
+# Sekcija usluga
 st.markdown('<h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif;">NAŠE USLUGE</h2>', unsafe_allow_html=True)
 st.markdown('<div style="width: 50px; height: 3px; background-color: #E53E3E; margin: 15px auto 50px auto;"></div>', unsafe_allow_html=True)
 
-# TRI KARTICE SA USLUGAMA
 col1, col2, col3 = st.columns(3)
-
 with col1:
-    st.markdown("""
-        <div class="service-box box-black" style="font-family: sans-serif;">
-            <div style="font-size: 40px; margin-bottom: 15px;">📝</div>
-            <h3 style="font-weight: 700; margin-bottom: 15px; color: #111111;">Registracija vozila</h3>
-            <p style="color: #666666; line-height: 1.6; font-size: 15px;">Kompletna usluga tehničkog pregleda, osiguranja i izdavanja registracionih nalepnica bez odlaska u MUP.</p>
-        </div>
-    """, unsafe_allow_html=True)
-
+    st.markdown('<div class="service-box box-black" style="font-family: sans-serif;"><div style="font-size: 40px; margin-bottom: 15px;">📝</div><h3 style="font-weight: 700; margin-bottom: 15px; color: #111111;">Registracija vozila</h3><p style="color: #666666; line-height: 1.6; font-size: 15px;">Kompletna usluga tehničkog pregleda, osiguranja i izdavanja registracionih nalepnica bez odlaska u MUP.</p></div>', unsafe_allow_html=True)
 with col2:
-    st.markdown("""
-        <div class="service-box box-red" style="font-family: sans-serif;">
-            <div style="font-size: 40px; margin-bottom: 15px;">🚢</div>
-            <h3 style="font-weight: 700; margin-bottom: 15px; color: #111111;">Uvoz vozila</h3>
-            <p style="color: #666666; line-height: 1.6; font-size: 15px;">Pomoć pri odabiru, organizacija transporta, carinjenje i kompletna dokumentacija za uvoz automobila.</p>
-        </div>
-    """, unsafe_allow_html=True)
-
+    st.markdown('<div class="service-box box-red" style="font-family: sans-serif;"><div style="font-size: 40px; margin-bottom: 15px;">🚢</div><h3 style="font-weight: 700; margin-bottom: 15px; color: #111111;">Uvoz vozila</h3><p style="color: #666666; line-height: 1.6; font-size: 15px;">Pomoć pri odabiru, organizacija transporta, carinjenje i kompletna dokumentacija za uvoz automobila.</p></div>', unsafe_allow_html=True)
 with col3:
-    st.markdown("""
-        <div class="service-box box-black" style="font-family: sans-serif;">
-            <div style="font-size: 40px; margin-bottom: 15px;">💳</div>
-            <h3 style="font-weight: 700; margin-bottom: 15px; color: #111111;">Platni promet</h3>
-            <p style="color: #666666; line-height: 1.6; font-size: 15px;">Brzo i sigurno plaćanje svih vrsta računa, taksi i uplatnica direktno na našem šalteru.</p>
-        </div>
-    """, unsafe_allow_html=True)
+    st.markdown('<div class="service-box box-black" style="font-family: sans-serif;"><div style="font-size: 40px; margin-bottom: 15px;">💳</div><h3 style="font-weight: 700; margin-bottom: 15px; color: #111111;">Platni promet</h3><p style="color: #666666; line-height: 1.6; font-size: 15px;">Brzo i sigurno plaćanje svih vrsta računa, taksi i uplatnica direktno na našem šalteru.</p></div>', unsafe_allow_html=True)
 
-# POMERENO NAGORE: Odmah se nastavlja kalkulator bez velikih praznina
-st.markdown('<div id="kalkulator-sekcija" style="margin-top: 40px;"></div>', unsafe_allow_html=True)
-
-# --- NASLOV ZA KALKULATOR: Mali font, normal debljina ---
+# Pomeranje kalkulatora tik ispod usluga
+st.markdown('<br><br id="kalkulator-zona">', unsafe_allow_html=True)
 st.markdown('<h2 style="text-align: center; font-weight: normal; color: #111111; font-family: sans-serif; font-size: 18px; letter-spacing: 1px;">Kalkulator registracije</h2>', unsafe_allow_html=True)
 st.markdown('<div style="width: 35px; height: 2px; background-color: #E53E3E; margin: 10px auto 25px auto;"></div>', unsafe_allow_html=True)
 
-# SUŽAVANJE ŠIRINE POLJA (Kalkulator postavljen u uže centralne kolone na 50% širine)
-layout_col1, layout_col2, layout_col3 = st.columns([1, 2, 1])
-
-with layout_col2:
-    st.markdown('<div style="background-color: #f9f9f9; padding: 25px; border-radius: 6px; border: 1px solid #eeeeee; font-family: sans-serif; margin-bottom: 10px;">', unsafe_allow_html=True)
-    
-    # Tri unutrašnje kolone za horizontalna polja u suženom prozoru
-    field_col1, field_col2, field_col3 = st.columns(3)
-    
-    with field_col1:
-        kubikaza = st.selectbox("Zapremina motora:", [
-            "Do 1150 cm³", "1150 - 1300 cm³", "1300 - 1600 cm³", 
-            "1600 - 2000 cm³", "2000 - 2500 cm³", "Preko 2500 cm³"
-        ])
-
-    with field_col2:
-        snaga = st.slider("Snaga motora (kW):", min_value=20, max_value=250, value=75)
-
-    with field_col3:
-        godiste = st.selectbox("Godište vozila:", [
-            "Novo vozilo", "Do 5 godina", 
+# POTPUNO BEZBEDAN I ČIST HTML KALKULATOR (Sva polja u jednoj liniji, uže i centrirano)
+st.markdown("""
+    <div class="calculator-container">
+        <form onsubmit="event.preventDefault(); var rez = document.getElementById('calc-result'); rez.style.display = 'block';">
+            <div class="calc-row">
+                <div class="calc-field">
