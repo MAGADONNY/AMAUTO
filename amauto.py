@@ -265,13 +265,14 @@ with col3:
         </div>
     """, unsafe_allow_html=True)
 
-st.markdown('<br><br id="kalkulator-sekcija"><br>', unsafe_allow_html=True)
+# POMERENO NAGORE: Mala distanca, odmah se nastavlja kalkulator
+st.markdown('<div id="kalkulator-sekcija" style="margin-top: 40px;"></div>', unsafe_allow_html=True)
 
-# --- POPRAVLJEN NASLOV ZA KALKULATOR: Mali font, normal debljina ---
+# --- NASLOV ZA KALKULATOR: Mali font, normal debljina ---
 st.markdown('<h2 style="text-align: center; font-weight: normal; color: #111111; font-family: sans-serif; font-size: 18px; letter-spacing: 1px;">Kalkulator registracije</h2>', unsafe_allow_html=True)
 st.markdown('<div style="width: 35px; height: 2px; background-color: #E53E3E; margin: 10px auto 25px auto;"></div>', unsafe_allow_html=True)
 
-# SUŽAVANJE ŠIRINE POLJA (Kalkulator postavljen u uže centralne kolone)
+# SUŽAVANJE ŠIRINE POLJA (Kalkulator postavljen u uže centralne kolone na 50% širine)
 layout_col1, layout_col2, layout_col3 = st.columns([1, 2, 1])
 
 with layout_col2:
@@ -281,7 +282,7 @@ with layout_col2:
     field_col1, field_col2, field_col3 = st.columns(3)
     
     with field_col1:
-        kubikaza = st.selectbox("Zapremina motora (cm³):", [
+        kubikaza = st.selectbox("Zapremina motora:", [
             "Do 1150 cm³", "1150 - 1300 cm³", "1300 - 1600 cm³", 
             "1600 - 2000 cm³", "2000 - 2500 cm³", "Preko 2500 cm³"
         ])
@@ -293,7 +294,3 @@ with layout_col2:
         godiste = st.selectbox("Godište vozila:", [
             "Novo vozilo", "Do 5 godina", 
             "5 do 10 godina", "Preko 10 godina"
-        ])
-
-    st.markdown('<br>', unsafe_allow_html=True)
-    
