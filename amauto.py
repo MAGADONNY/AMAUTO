@@ -287,12 +287,12 @@ with col3:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# INTERAKTIVNI ORJENTACIONI KALKULATOR (Sužen za oko 20% i centriran)
+# INTERAKTIVNI ORJENTACIONI KALKULATOR
 st.write("---")
 st.markdown('<p style="text-align: center; font-size: 22px; font-weight: normal; color: #111111; font-family: sans-serif; margin-bottom: 0px; letter-spacing: 1px;">ORJENTACIONI KALKULATOR TROŠKOVA</p>', unsafe_allow_html=True)
 st.markdown('<p style="text-align: center; color: #666666; font-family: sans-serif; font-size: 14px; margin-top: 5px; margin-bottom: 25px;">za tačan iznos molimo da nas kontaktirate</p>', unsafe_allow_html=True)
 
-# Odnos kolona [1.5, 7, 1.5] savršeno sužava i balansira središnji segment za tačno 20%
+# Odnos kolona [1.5, 7, 1.5] za savršeno sužene i centrirane unose
 glavni_kalk_levo, glavni_kalk_sadrzaj, glavni_kalk_desno = st.columns([1.5, 7, 1.5])
 
 with glavni_kalk_sadrzaj:
@@ -331,4 +331,5 @@ with glavni_kalk_sadrzaj:
 
 st.write("<br>", unsafe_allow_html=True)
 
-# TAMNA KONTAKT SEKCIJA (Futer je stabilno na dnu van svih kolona)
+# TAMNA KONTAKT SEKCIJA (VRAĆENI FOOTER)
+kontakt_html = "<div id='kontakt' class='contact-footer' style='font-family: sans-serif;'>"
