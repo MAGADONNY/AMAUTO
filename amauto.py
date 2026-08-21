@@ -328,23 +328,21 @@ with glavni_kalk_sadrzaj:
     st.write("")
 st.info(f"Procena troškova registracije: oko {procenjena_cena:,} RSD")
 
+
 # VRAĆENA ČISTA I FINO PODEŠENA KONTAKT SEKCIJA
 st.write("---")
+st.markdown('<p style="text-align: center; font-size: 22px; font-weight: normal; color: #111111; font-family: sans-serif; margin-bottom: 20px; letter-spacing: 1px;">KONTAKT INFORMACIJE</p>', unsafe_allow_html=True)
 
-kontakt_tekst = """
-<div style="font-family: sans-serif; text-align: center; max-width: 600px; margin: 0 auto; padding: 10px 20px;">
-    <p style="font-size: 22px; font-weight: normal; color: #111111; margin-bottom: 25px; letter-spacing: 1px;">KONTAKT INFORMACIJE</p>
-    
-    <div style="font-size: 16px; color: #111111; line-height: 1.6; text-align: left; display: inline-block;">
+fut_col1, fut_sredina, fut_col3 = st.columns(3)
+with fut_sredina:
+    kontakt_tekst = """
+    <div style="font-family: sans-serif; font-size: 16px; color: #111111; line-height: 1.4; text-align: left; padding-left: 10px;">
         <p style="margin: 5px 0;">📍 Adresa: <strong>1. Novembar 250, LAĆARAK</strong></p>
         <p style="margin: 5px 0;">📞 Telefon: <strong>061 / 60-65-018</strong></p>
         <p style="margin: 5px 0;">📧 Email: <strong>am.auto@gmail.com</strong></p>
+        <p style="margin: 25px 0 0 0; font-size: 13px; color: #777777;">© 2026 AM AUTO. Sva prava zadržana. | Powered by MAGICOMP</p>
     </div>
-    
-    <div style="margin-top: 30px; font-size: 13px; color: #777777; line-height: 1.5;">
-        <p style="margin: 0;">© 2026 AM AUTO. Sva prava zadržana.</p>
-        <p style="margin: 5px 0 0 0;">Powered by MAGICOMP</p>
-    </div>
-</div>
-"""
-st.markdown(kontakt_tekst, unsafe_allow_html=True)
+    """
+    st.markdown(kontakt_tekst, unsafe_allow_html=True)
+
+st.markdown('</div>', unsafe_allow_html=True)
