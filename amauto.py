@@ -173,16 +173,31 @@ st.markdown(f"""
         transform: translateY(-2px);
     }}
     
-    /* Stilizacija kartica sa uslugama */
+    /* Stilizacija kartica sa uslugama - SMANJENE ZA 50% VISINE */
     .service-box {{
         background-color: #f9f9f9;
-        padding: 40px 25px;
+        padding: 20px 15px; /* Smanjen vertikalni i horizontalni padding za kraći izgled */
         border-radius: 6px;
         text-align: center;
         box-shadow: 0 4px 6px rgba(0,0,0,0.02);
     }}
     .box-black {{ border-top: 4px solid #111111; }}
     .box-red {{ border-top: 4px solid #E53E3E; }}
+    
+    /* Sekcija Usluga - Smanjenje praznog prostora na telefonima i računarima */
+    .usluge-sekcija {{
+        margin-top: 20px !important;
+    }}
+    
+    @media (max-width: 768px) {{
+        /* Ekstremno smanjenje praznog prostora iznad usluga na mobilnim telefonima */
+        .usluge-sekcija {{
+            margin-top: -30px !important;
+        }}
+        .main-content {{
+            margin-top: 85px;
+        }}
+    }}
     
     /* Kontakt sekcija na dnu (Footer) */
     .contact-footer {{
@@ -233,41 +248,43 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-st.markdown('<br><br>', unsafe_allow_html=True)
+# POCETAK SEKCIJE "NAŠE USLUGE" (Sa dodatim klasama za kontrolu razmaka)
+st.markdown('<div class="usluge-sekcija">', unsafe_allow_html=True)
+st.markdown('<br><h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif; margin-bottom: 0px;">NAŠE USLUGE</h2>', unsafe_allow_html=True)
+st.markdown('<div style="width: 50px; height: 3px; background-color: #E53E3E; margin: 10px auto 30px auto;"></div>', unsafe_allow_html=True)
 
-# NASLOV USLUGA
-st.markdown('<h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif;">NAŠE USLUGE</h2>', unsafe_allow_html=True)
-st.markdown('<div style="width: 50px; height: 3px; background-color: #E53E3E; margin: 15px auto 50px auto;"></div>', unsafe_allow_html=True)
-
-# TRI KARTICE SA USLUGAMA
+# TRI KARTICE SA USLUGAMA (Iste širine, kraća visina)
 col1, col2, col3 = st.columns(3)
 
 with col1:
     st.markdown("""
         <div class="service-box box-black" style="font-family: sans-serif;">
-            <div style="font-size: 40px; margin-bottom: 15px;">📝</div>
-            <h3 style="font-weight: 700; margin-bottom: 15px; color: #111111;">Registracija vozila</h3>
-            <p style="color: #666666; line-height: 1.6; font-size: 15px;">Kompletna usluga tehničkog pregleda, osiguranja i izdavanja registracionih nalepnica bez odlaska u MUP.</p>
+            <div style="font-size: 35px; margin-bottom: 5px;">📝</div>
+            <h3 style="font-weight: 700; margin-bottom: 8px; color: #111111; font-size: 18px;">Registracija vozila</h3>
+            <p style="color: #666666; line-height: 1.5; font-size: 14px; margin-bottom: 0px;">Kompletna usluga tehničkog pregleda, osiguranja i izdavanja nalepnica bez odlaska u MUP.</p>
         </div>
     """, unsafe_allow_html=True)
 
 with col2:
     st.markdown("""
         <div class="service-box box-red" style="font-family: sans-serif;">
-            <div style="font-size: 40px; margin-bottom: 15px;">🚢</div>
-            <h3 style="font-weight: 700; margin-bottom: 15px; color: #111111;">Uvoz vozila</h3>
-            <p style="color: #666666; line-height: 1.6; font-size: 15px;">Pomoć pri odabiru, organizacija transporta, carinjenje i kompletna dokumentacija za uvoz automobila.</p>
+            <div style="font-size: 35px; margin-bottom: 5px;">🚗</div>
+            <h3 style="font-weight: 700; margin-bottom: 8px; color: #111111; font-size: 18px;">Uvoz vozila</h3>
+            <p style="color: #666666; line-height: 1.5; font-size: 14px; margin-bottom: 0px;">Pomoć pri odabiru, organizacija transporta, carinjenje i kompletna dokumentacija za uvoz automobila.</p>
         </div>
     """, unsafe_allow_html=True)
 
 with col3:
     st.markdown("""
         <div class="service-box box-black" style="font-family: sans-serif;">
-            <div style="font-size: 40px; margin-bottom: 15px;">💳</div>
-            <h3 style="font-weight: 700; margin-bottom: 15px; color: #111111;">Platni promet</h3>
-            <p style="color: #666666; line-height: 1.6; font-size: 15px;">Brzo i sigurno plaćanje svih vrsta računa, taksi i uplatnica direktno na našem šalteru.</p>
+            <div style="font-size: 35px; margin-bottom: 5px;">💳</div>
+            <h3 style="font-weight: 700; margin-bottom: 8px; color: #111111; font-size: 18px;">Platni promet</h3>
+            <p style="color: #666666; line-height: 1.5; font-size: 14px; margin-bottom: 0px;">Brzo i sigurno plaćanje svih vrsta računa, taksi i uplatnica direktno na našem šalteru.</p>
         </div>
     """, unsafe_allow_html=True)
+
+# Zatvaranje sekcije usluga
+st.markdown('</div>', unsafe_allow_html=True)
 
 # TAMNA KONTAKT SEKCIJA
 st.markdown("""
@@ -275,12 +292,3 @@ st.markdown("""
         <h2 style="font-weight: 700; margin-bottom: 10px;">KONTAKT INFORMACIJE</h2>
         <div style="width: 35px; height: 2px; background-color: #E53E3E; margin: 0 auto 40px auto;"></div>
         <p style="font-size: 17px; color: #dddddd; margin-bottom: 15px;">📍 Adresa: <strong>1. Novembar 250, LAĆARAK</strong></p>
-        <p style="font-size: 17px; color: #dddddd; margin-bottom: 15px;">📞 Telefon: <a href="tel:+381616065018" style="color: white; text-decoration: none;"><strong>061 / 60-65-018</strong></a></p>
-        <p style="font-size: 17px; color: #dddddd; margin-bottom: 30px;">📧 Email: <a href="mailto:am.auto@gmail.com" style="color: white; text-decoration: none;"><strong>am.auto@gmail.com</strong></a></p>
-        <p style="font-size: 14px; color: #555555; margin-top: 40px;">&copy; 2026 AM AUTO. Sva prava zadržana.</p>
-        <div class="powered-by">Powered by MAGICOMP</div>
-    </div>
-""", unsafe_allow_html=True)
-
-# Zatvaranje glavnog dela stranice
-st.markdown('</div>', unsafe_allow_html=True)
