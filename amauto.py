@@ -178,21 +178,29 @@ html {{
     margin-top: 20px !important;
 }}
 
+.contact-footer {{
+    background-color: #111111;
+    color: white;
+    padding: 50px 40px;
+    text-align: center;
+    margin-top: 20px; /* Smanjeno sa 60px na PC verziji */
+}}
+
 @media (max-width: 768px) {{
     .usluge-sekcija {{
-        margin-top: -30px !important;
+        margin-top: -50px !important; /* Jače privlačenje usluga nagore ka hero slici */
     }}
     .main-content {{
         margin-top: 85px;
     }}
-}}
-
-.contact-footer {{
-    background-color: #111111;
-    color: white;
-    padding: 60px 40px;
-    text-align: center;
-    margin-top: 60px;
+    /* Dodatno smanjenje razmaka između elemenata i povlačenje kontakta nagore na mobilnom */
+    [data-testid="stVerticalBlock"] {{
+        gap: 0.5rem !important;
+    }}
+    .contact-footer {{
+        margin-top: -10px !important; /* Forsirano privlačenje kontakt bloka nagore */
+        padding: 40px 20px;
+    }}
 }}
 
 .powered-by {{
@@ -272,6 +280,7 @@ with col3:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
+# TAMNA KONTAKT SEKCIJA SA DODATNIM POPRAVKAMA ZA RAZMAK
 kontakt_html = """
 <div id="kontakt" class="contact-footer" style="font-family: sans-serif;">
     <h2 style="font-weight: 700; margin-bottom: 10px;">KONTAKT INFORMACIJE</h2>
