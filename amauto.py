@@ -324,10 +324,15 @@ elif starost > 10:
 elif starost > 5:
     osnovica = osnovica * 0.8
 
-procenjena_cena = int(osnovica + 6000) # Dodata fiksna cena tehničkog pregleda i taksi
+procenjena_cena = int(osnovica + 6000)
 
-st.markdown(f"""
-    <div style="background-color: #f9f9f9; padding: 20px; border-radius: 6px; text-align: center; border-left: 4px solid #E53E3E; margin-top: 20px; font-family: sans-serif;">
-        <span style="font-size: 16px; color: #555555;">Okvirna procena troškova registracije:</span><br>
-        <span style="font-size: 28px; font-weight: 800; color: #111111;">oko {procenjena_cena:,} RSD</span>
-    </div>
+# Zamena HTML prikaza sa čistim i bezbednim Streamlit elementom za cenu
+st.subheader("Okvirna procena troškova registracije:")
+st.info(f"oko {procenjena_cena} RSD")
+
+st.markdown('</div>', unsafe_allow_html=True)
+
+# TAMNA KONTAKT SEKCIJA
+st.markdown("""
+    <div id="kontakt" class="contact-footer" style="font-family: sans-serif;">
+        <h2 style="font-weight: 700; margin-bottom: 10px;">KONTAKT INFORMACIJE</h2>
