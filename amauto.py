@@ -325,7 +325,7 @@ with glavni_kalk_sadrzaj:
         osnovica = osnovica * 0.8
 
     procenjena_cena = int(osnovica + 6000)
-        st.write("")
+    st.write("")
     st.info(f"Procena troškova registracije: oko {procenjena_cena:,} RSD")
 
 # VRAĆENA ČISTA I BEZBEDNA KONTAKT SEKCIJA
