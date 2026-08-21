@@ -179,6 +179,10 @@ html {
 .usluge-sekcija {
     margin-top: 20px !important;
 }
+.kalkulator-sekcija {
+    margin-top: 50px !important;
+    padding: 0 5%;
+}
 .contact-footer {
     background-color: #111111;
     color: white;
@@ -287,15 +291,12 @@ with col3:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# NOV, POTPUNO BEZBEDAN BOX-SEGMENT ZA KALKULATOR (Izvorni Streamlit bez ugnježdenog HTML-a)
-st.write("---") # Čista linija za razdvajanje sekcija
-
+# NOV, IZVORNI I ČIST KALKULATOR
+st.write("---")
 st.markdown('<h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif; margin-bottom: 0px;">ORJENTACIONI KALKULATOR TROŠKOVA</h2>', unsafe_allow_html=True)
 st.markdown('<p style="text-align: center; color: #666666; font-family: sans-serif; font-size: 14px; margin-top: 5px;">za tačan iznos molimo da nas kontaktirate</p>', unsafe_allow_html=True)
 
-# Kreiranje box-segment kontejnera
 with st.container():
-    # Tri kolone za polja na PC-ju
     k_col1, k_col2, k_col3 = st.columns(3)
     
     with k_col1:
@@ -307,7 +308,6 @@ with st.container():
     with k_col3:
         godiste = st.number_input("Godište vozila:", min_value=1980, max_value=2026, value=2015, step=1, key="calc_year")
 
-    # Matematika za kalkulaciju cene
     osnovica = 15000
     if kubikaza > 2000:
         osnovica += 25000
@@ -326,10 +326,9 @@ with st.container():
         osnovica = osnovica * 0.8
 
     procenjena_cena = int(osnovica + 6000)
-
-    # Prikaz cene kroz bezbedan i čist Streamlit element
     st.info(f"Okvirna procena troškova registracije: oko {procenjena_cena:,} RSD")
 
-# TAMNA KONTAKT SEKCIJA
-st.markdown("""
-    <div id="kontakt" class="contact-footer" style="font-family: sans-serif;">
+# POTPUNO SIGURAN KONTAKT FAJLI BEZ DUGAČKIH NAVODNIKA I BEZ SUVIŠNOG TAGA NA KRAJU
+kontakt_html = "<div id='kontakt' class='contact-footer' style='font-family: sans-serif;'>"
+kontakt_html += "<h2 style='font-weight: 700; margin-bottom: 10px;'>KONTAKT INFORMACIJE</h2>"
+kontakt_html += "<div style='width: 35px; height: 2px; background-color: #E53E3E; margin: 0 auto 40px auto;'></div>"
