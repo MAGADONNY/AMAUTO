@@ -179,10 +179,6 @@ html {
 .usluge-sekcija {
     margin-top: 20px !important;
 }
-.kalkulator-sekcija {
-    margin-top: 50px !important;
-    padding: 0 5%;
-}
 .contact-footer {
     background-color: #111111;
     color: white;
@@ -292,12 +288,13 @@ with col3:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# INTERAKTIVNI ORJENTACIONI KALKULATOR (Smanjen i od-boldovan naslov)
+# INTERAKTIVNI ORJENTACIONI KALKULATOR (Smanjen i od-boldovan font)
 st.write("---")
-st.markdown('<h3 style="text-align: center; font-weight: 400; color: #111111; font-family: sans-serif; margin-bottom: 0px; letter-spacing: 1px;">ORJENTACIONI KALKULATOR TROŠKOVA</h3>', unsafe_allow_html=True)
+st.markdown('<p style="text-align: center; font-size: 22px; font-weight: normal; color: #111111; font-family: sans-serif; margin-bottom: 0px; letter-spacing: 1px;">ORJENTACIONI KALKULATOR TROŠKOVA</p>', unsafe_allow_html=True)
 st.markdown('<p style="text-align: center; color: #666666; font-family: sans-serif; font-size: 14px; margin-top: 5px; margin-bottom: 25px;">za tačan iznos molimo da nas kontaktirate</p>', unsafe_allow_html=True)
 
-glavni_kalk_col0, glavni_kalk_sredina, glavni_kalk_col4 = st.columns()
+# Smeštanje kalkulatora u bezbedan raspored od 3 kolone (širina polja)
+glavni_kalk_col1, glavni_kalk_sredina, glavni_kalk_col3 = st.columns(3)
 
 with glavni_kalk_sredina:
     k_col1, k_col2, k_col3 = st.columns(3)
@@ -333,5 +330,5 @@ with glavni_kalk_sredina:
     st.write("")
     st.info(f"Procena troškova registracije: oko {procenjena_cena:,} RSD")
 
-# TAMNA KONTAKT SEKCIJA (Izvučena skroz van kolona na čistu površinu)
+# TAMNA KONTAKT SEKCIJA (Futer)
 kontakt_html = "<div id='kontakt' class='contact-footer' style='font-family: sans-serif;'>"
