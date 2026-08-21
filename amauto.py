@@ -253,7 +253,7 @@ st.markdown(hero_html, unsafe_allow_html=True)
 
 # SEKCIJA "NAŠE USLUGE"
 st.markdown('<div class="usluge-sekcija">', unsafe_allow_html=True)
-st.markdown('<br><h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif; margin-bottom: 0px;">NAŠE USLUGE</h2>', unsafe_allow_html=True)
+st.markdown('<br><h2 style="text-align: center; font-weight: 500; color: #ffffff; font-family: sans-serif; margin-bottom: 0px;">NAŠE USLUGE</h2>', unsafe_allow_html=True)
 st.markdown('<div style="width: 50px; height: 3px; background-color: #E53E3E; margin: 10px auto 30px auto;"></div>', unsafe_allow_html=True)
 
 col1, col2, col3 = st.columns(3)
