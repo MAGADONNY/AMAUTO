@@ -24,24 +24,24 @@ pozadina_b64 = ucitaj_sliku_base64("AMBck.JPG")
 izvor_logotipa = logo_b64 if logo_b64 else "https://placeholder.com"
 stil_pozadine = f"url('{pozadina_b64}');" if pozadina_b64 else "linear-gradient(135deg, #111111 0%, #222222 100%);"
 
-# 3. Globalni CSS stilovi
-css_stilovi = f"""
+# 3. Globalni CSS stilovi (Uklonjen f-string da karakteri poput % ne prave konflikt)
+css_stilovi = """
 <style>
-#MainMenu {{visibility: hidden;}}
-footer {{visibility: hidden;}}
-header {{visibility: hidden;}}
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
 
-.block-container {{
+.block-container {
     padding-top: 0px !important;
     padding-bottom: 0px !important;
-}}
+}
 
-html {{
+html {
     scroll-behavior: smooth;
-}}
+}
 
 /* Fiksirani beli header na vrhu ekrana */
-.custom-header {{
+.custom-header {
     position: fixed;
     top: 0;
     left: 0;
@@ -54,30 +54,30 @@ html {{
     justify-content: space-between;
     align-items: center;
     height: 85px;
-}}
+}
 
-.logo-container img {{
+.logo-container img {
     height: 65px;
     width: auto;
     display: block;
     object-fit: contain;
-}}
+}
 
-.header-phone a {{
+.header-phone a {
     color: #111111;
     text-decoration: none;
     font-weight: bold;
     font-size: 16px;
-}}
-.header-phone a:hover {{
+}
+.header-phone a:hover {
     color: #E53E3E;
-}}
+}
 
-.main-content {{
+.main-content {
     margin-top: 85px;
-}}
+}
 
-.hero-container {{
+.hero-container {
     position: relative;
     width: 100%;
     min-height: 580px;
@@ -86,48 +86,47 @@ html {{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}}
+}
 
-@keyframes advancedZoomBlur {{
-    0% {{
+@keyframes advancedZoomBlur {
+    0% {
         transform: scale(1.25);
         filter: blur(6px) brightness(0.3);
-    }}
-    100% {{
+    }
+    100% {
         transform: scale(1.0);
         filter: blur(0px) brightness(1.0);
-    }}
-}}
+    }
+}
 
-.hero-background-animated {{
+.hero-background-animated {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75)), {stil_pozadine}
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     z-index: 1;
     animation: advancedZoomBlur 3.2s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
-}}
+}
 
-.hero-content {{
+.hero-content {
     position: relative;
     z-index: 99;
     text-align: center;
     color: white !important;
     padding: 40px;
     width: 100%;
-}}
+}
 
-@keyframes elementsFadeIn {{
-    from {{ opacity: 0; transform: translateY(20px); }}
-    to {{ opacity: 1; transform: translateY(0); }}
-}}
+@keyframes elementsFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-.hero-content h1 {{
+.hero-content h1 {
     font-size: 46px;
     font-weight: 300;
     letter-spacing: 2px;
@@ -135,9 +134,9 @@ html {{
     text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
     color: white !important;
     animation: elementsFadeIn 1.4s ease-out forwards;
-}}
+}
 
-.hero-content p {{
+.hero-content p {
     font-size: 19px;
     color: #e0e0e0 !important;
     max-width: 600px;
@@ -145,9 +144,9 @@ html {{
     line-height: 1.6;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
     animation: elementsFadeIn 1.8s ease-out forwards;
-}}
+}
 
-.hero-btn {{
+.hero-btn {
     background-color: #E53E3E;
     color: white !important;
     padding: 16px 40px;
@@ -159,98 +158,103 @@ html {{
     box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4);
     transition: 0.3s;
     animation: elementsFadeIn 2.2s ease-out forwards;
-}}
-.hero-btn:hover {{
+}
+.hero-btn:hover {
     background-color: #C53030;
     transform: translateY(-2px);
-}}
+}
 
 /* DIZAJN KARTICA */
-.service-box {{
+.service-box {
     background-color: #f9f9f9;
     padding: 20px 15px;
     border-radius: 6px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-}}
-.box-black {{ border-top: 4px solid #111111; }}
-.box-red {{ border-top: 4px solid #E53E3E; }}
+}
+.box-black { border-top: 4px solid #111111; }
+.box-red { border-top: 4px solid #E53E3E; }
 
 /* RAZMACI NA PC VERZIJI */
-.usluge-sekcija {{
+.usluge-sekcija {
     margin-top: 20px !important;
-}}
-.kalkulator-sekcija {{
+}
+.kalkulator-sekcija {
     margin-top: 50px !important;
     padding: 0 5%;
-}}
-.contact-footer {{
+}
+.contact-footer {
     background-color: #111111;
     color: white;
     padding: 50px 40px;
     text-align: center;
     margin-top: 40px !important;
-}}
+}
 
 /* STIL ZA ZBIJANJE REDOVA U KONTAKTU */
-.contact-item {{
+.contact-item {
     font-size: 17px;
     color: #dddddd;
     margin: 6px 0 !important;
     padding: 0 !important;
     line-height: 1.4;
-}}
+}
 
 /* SPECIJALNA PODEŠAVANJA ZA MOBILNE TELEFONE */
-@media (max-width: 768px) {{
-    .usluge-sekcija {{
+@media (max-width: 768px) {
+    .usluge-sekcija {
         transform: translateY(-45px);
-    }}
-    div[data-testid="column"] {{
+    }
+    div[data-testid="column"] {
         margin-bottom: -15px !important; 
-    }}
-    .contact-footer {{
+    }
+    .contact-footer {
         transform: translateY(-60px);
         padding: 40px 20px;
-    }}
-}}
+    }
+}
 
-.powered-by {{
+.powered-by {
     font-size: 13px;
     color: #2ECC71 !important;
     margin-top: 15px;
     letter-spacing: 1px;
     font-weight: normal !important;
-}}
+}
 </style>
 """
-st.markdown(css_stilovi, unsafe_allow_html=True)
+
+# Ubacivanje dinamičke pozadine spajanjem stringova
+css_sa_pozadinom = css_stilovi.replace(".hero-background-animated {", f".hero-background-animated {{ background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75)), {stil_pozadine}")
+st.markdown(css_sa_pozadinom, unsafe_allow_html=True)
 
 # 4. IZGRADNJA SAJTA
 
-st.markdown(f"""
-    <div class="custom-header">
-        <div class="logo-container">
-            <img src="{izvor_logotipa}" alt="AM AUTO Logo">
-        </div>
-        <div class="header-phone">
-            <a href="tel:+381616065018">📞 061 / 60-65-018</a>
-        </div>
+zaglavlje_html = f"""
+<div class="custom-header">
+    <div class="logo-container">
+        <img src="{izvor_logotipa}" alt="AM AUTO Logo">
     </div>
-""", unsafe_allow_html=True)
+    <div class="header-phone">
+        <a href="tel:+381616065018">📞 061 / 60-65-018</a>
+    </div>
+</div>
+"""
+st.markdown(zaglavlje_html, unsafe_allow_html=True)
 
 st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
-st.markdown(f"""
-    <div class="hero-container">
-        <div class="hero-background-animated"></div>
-        <div class="hero-content">
-            <h1><b style="font-weight: 900;">AM AUTO</b> agencija</h1>
-            <p>Sve na jednom mestu za Vaše vozilo. Brza registracija, siguran uvoz motornih vozila i pouzdan platni promet.</p>
-            <a href="#kontakt" class="hero-btn">KONTAKTIRAJTE NAS</a>
-        </div>
+hero_html = """
+<div class="hero-container">
+    <div class="hero-background-animated"></div>
+    <div class="hero-content">
+        <h1><b style="font-weight: 900;">AM AUTO</b> agencija</h1>
+        <p>Sve na jednom mestu za Vaše vozilo. Brza registracija, siguran uvoz motornih vozila i pouzdan platni promet.</p>
+        <a href="#kontakt" class="hero-btn">KONTAKTIRAJTE NAS</a>
     </div>
-""", unsafe_allow_html=True)
+</div>
+"""
+st.markdown(hero_html, unsafe_allow_html=True)
 
 # SEKCIJA "NAŠE USLUGE"
 st.markdown('<div class="usluge-sekcija">', unsafe_allow_html=True)
@@ -293,7 +297,6 @@ st.markdown('<div class="kalkulator-sekcija">', unsafe_allow_html=True)
 st.markdown('<h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif; margin-bottom: 0px;">ORJENTACIONI KALKULATOR TROŠKOVA</h2>', unsafe_allow_html=True)
 st.markdown('<p style="text-align: center; color: #666666; font-family: sans-serif; font-size: 15px; margin-top: 5px; margin-bottom: 25px;">za tačan iznos molimo da nas kontaktirate</p>', unsafe_allow_html=True)
 
-# Tri kolone za horizontalni unos polja na PC-ju
 k_col1, k_col2, k_col3 = st.columns(3)
 
 with k_col1:
@@ -305,7 +308,6 @@ with k_col2:
 with k_col3:
     godiste = st.number_input("Godište vozila:", min_value=1980, max_value=2026, value=2015, step=1)
 
-# Logika za bazičnu orjentacionu cenu
 osnovica = 15000
 if kubikaza > 2000:
     osnovica += 25000
@@ -315,7 +317,6 @@ elif kubikaza > 1600:
 if snaga > 100:
     osnovica += 7000
 
-# Popust na starost vozila
 starost = 2026 - godiste
 if starost > 20:
     osnovica = osnovica * 0.2
@@ -326,7 +327,6 @@ elif starost > 5:
 
 procenjena_cena = int(osnovica + 6000)
 
-# Zamena HTML prikaza sa čistim i bezbednim Streamlit elementom za cenu
 st.subheader("Okvirna procena troškova registracije:")
 st.info(f"oko {procenjena_cena} RSD")
 
@@ -336,3 +336,4 @@ st.markdown('</div>', unsafe_allow_html=True)
 st.markdown("""
     <div id="kontakt" class="contact-footer" style="font-family: sans-serif;">
         <h2 style="font-weight: 700; margin-bottom: 10px;">KONTAKT INFORMACIJE</h2>
+        <div style="width: 35px; height: 2px; background-color: #E53E3E; margin: 0 auto 40px auto;"></div>
