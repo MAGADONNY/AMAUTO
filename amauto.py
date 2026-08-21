@@ -329,7 +329,7 @@ with glavni_kalk_sadrzaj:
 st.info(f"Procena troškova registracije: oko {procenjena_cena:,} RSD")
 
 # VRAĆENA ČISTA I BEZBEDNA KONTAKT SEKCIJA
-    st.write("")
+st.write("")
     st.info(f"Procena troškova registracije: oko {procenjena_cena:,} RSD")
 
 # VRAĆENA ČISTA I FINO PODEŠENA KONTAKT SEKCIJA
