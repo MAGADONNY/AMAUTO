@@ -326,7 +326,7 @@ with glavni_kalk_sadrzaj:
 
     procenjena_cena = int(osnovica + 6000)
     st.write("")
-    st.info(f"Procena troškova registracije: oko {procenjena_cena:,} RSD")
+st.info(f"Procena troškova registracije: oko {procenjena_cena:,} RSD")
 
 # VRAĆENA ČISTA I BEZBEDNA KONTAKT SEKCIJA
 st.write("---")
@@ -341,9 +341,6 @@ with fut_sredina:
     st.caption("© 2026 AM AUTO. Sva prava zadržana. | Powered by MAGICOMP")
 
 st.markdown('</div>', unsafe_allow_html=True)
-
-    st.write("")
-    st.info(f"Procena troškova registracije: oko {procenjena_cena:,} RSD")
 
 st.write("<br>", unsafe_allow_html=True)
 
