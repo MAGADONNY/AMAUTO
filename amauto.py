@@ -176,7 +176,7 @@ st.markdown(f"""
     /* Stilizacija kartica sa uslugama - SMANJENE ZA 50% VISINE */
     .service-box {{
         background-color: #f9f9f9;
-        padding: 20px 15px; /* Smanjen vertikalni i horizontalni padding za kraći izgled */
+        padding: 20px 15px;
         border-radius: 6px;
         text-align: center;
         box-shadow: 0 4px 6px rgba(0,0,0,0.02);
@@ -190,7 +190,6 @@ st.markdown(f"""
     }}
     
     @media (max-width: 768px) {{
-        /* Ekstremno smanjenje praznog prostora iznad usluga na mobilnim telefonima */
         .usluge-sekcija {{
             margin-top: -30px !important;
         }}
@@ -248,7 +247,7 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# POCETAK SEKCIJE "NAŠE USLUGE" (Sa dodatim klasama za kontrolu razmaka)
+# POCETAK SEKCIJE "NAŠE USLUGE"
 st.markdown('<div class="usluge-sekcija">', unsafe_allow_html=True)
 st.markdown('<br><h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif; margin-bottom: 0px;">NAŠE USLUGE</h2>', unsafe_allow_html=True)
 st.markdown('<div style="width: 50px; height: 3px; background-color: #E53E3E; margin: 10px auto 30px auto;"></div>', unsafe_allow_html=True)
@@ -292,3 +291,4 @@ st.markdown("""
         <h2 style="font-weight: 700; margin-bottom: 10px;">KONTAKT INFORMACIJE</h2>
         <div style="width: 35px; height: 2px; background-color: #E53E3E; margin: 0 auto 40px auto;"></div>
         <p style="font-size: 17px; color: #dddddd; margin-bottom: 15px;">📍 Adresa: <strong>1. Novembar 250, LAĆARAK</strong></p>
+        <p style="font-size: 17px; color: #dddddd; margin-bottom: 15px;">📞 Telefon: <a href="tel:+381616065018" style="color: white; text-decoration: none;"><strong>061 / 60-65-018</strong></a></p>
