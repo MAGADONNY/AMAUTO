@@ -325,7 +325,23 @@ with glavni_kalk_sadrzaj:
         osnovica = osnovica * 0.8
 
     procenjena_cena = int(osnovica + 6000)
-    
+        st.write("")
+    st.info(f"Procena troškova registracije: oko {procenjena_cena:,} RSD")
+
+# VRAĆENA ČISTA I BEZBEDNA KONTAKT SEKCIJA
+st.write("---")
+st.markdown("<h2 style='text-align: center; font-family: sans-serif; font-weight: 700; color: #111111;'>KONTAKT INFORMACIJE</h2>", unsafe_allow_html=True)
+
+fut_col1, fut_sredina, fut_col3 = st.columns(3)
+with fut_sredina:
+    st.markdown("📍 Adresa: **1. Novembar 250, LAĆARAK**")
+    st.markdown("📞 Telefon: **061 / 60-65-018**")
+    st.markdown("📧 Email: **am.auto@gmail.com**")
+    st.write("")
+    st.caption("© 2026 AM AUTO. Sva prava zadržana. | Powered by MAGICOMP")
+
+st.markdown('</div>', unsafe_allow_html=True)
+
     st.write("")
     st.info(f"Procena troškova registracije: oko {procenjena_cena:,} RSD")
 
