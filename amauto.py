@@ -332,7 +332,6 @@ st.info(f"Procena troškova registracije: oko {procenjena_cena:,} RSD")
 # VRAĆENA ČISTA I FINO PODEŠENA KONTAKT SEKCIJA
 st.write("---")
 
-# Umesto st.columns(3) koji sakriva tekst na mobilnom, koristimo čist i siguran CSS omotač
 kontakt_tekst = """
 <div style="font-family: sans-serif; text-align: center; max-width: 600px; margin: 0 auto; padding: 10px 20px;">
     <p style="font-size: 22px; font-weight: normal; color: #111111; margin-bottom: 25px; letter-spacing: 1px;">KONTAKT INFORMACIJE</p>
@@ -350,5 +349,3 @@ kontakt_tekst = """
 </div>
 """
 st.markdown(kontakt_tekst, unsafe_allow_html=True)
-
-st.markdown('</div>', unsafe_allow_html=True)
