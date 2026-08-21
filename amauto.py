@@ -331,10 +331,12 @@ st.info(f"Procena troškova registracije: oko {procenjena_cena:,} RSD")
 
 # VRAĆENA ČISTA I FINO PODEŠENA KONTAKT SEKCIJA
 st.write("---")
-st.markdown('<p style="text-align: center; font-size: 22px; font-weight: normal; color: #111111; font-family: sans-serif; margin-bottom: 20px; letter-spacing: 1px;">KONTAKT INFORMACIJE</p>', unsafe_allow_html=True)
 
 fut_col1, fut_sredina, fut_col3 = st.columns(3)
 with fut_sredina:
+    # Naslov je sada prebačen unutar kolone i uvučen za 4 razmaka:
+    st.markdown('<p style="text-align: left; font-size: 22px; font-weight: normal; color: #111111; font-family: sans-serif; margin-bottom: 20px; letter-spacing: 1px; padding-left: 10px;">KONTAKT INFORMACIJE</p>', unsafe_allow_html=True)
+    
     kontakt_tekst = """
     <div style="font-family: sans-serif; font-size: 16px; color: #111111; line-height: 1.4; text-align: left; padding-left: 10px;">
         <p style="margin: 5px 0;">📍 Adresa: <strong>1. Novembar 250, LAĆARAK</strong></p>
@@ -344,5 +346,7 @@ with fut_sredina:
     </div>
     """
     st.markdown(kontakt_tekst, unsafe_allow_html=True)
+
+st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
