@@ -307,22 +307,45 @@ with glavni_kalk_sadrzaj:
     with k_col3:
         godiste = st.number_input("Godište vozila:", min_value=1980, max_value=2026, value=2015, step=1, key="calc_year")
 
-    osnovica = 15000
-    if kubikaza > 2000:
-        osnovica += 25000
+        # 1. Osnovna cena osiguranja na osnovu snage (kW) - prosečne cene u Srbiji
+    cena_osiguranja = 12000
+    if snaga > 110:
+        cena_osiguranja = 21000
+    elif snaga > 84:
+        cena_osiguranja = 17000
+    elif snaga > 66:
+        cena_osiguranja = 15000
+    elif snaga > 55:
+        cena_osiguranja = 13500
+
+    # 2. Državni porez na osnovu kubikaže (ccm) - pun iznos bez starosnog popusta
+    drzavni_porez = 3000
+    if kubikaza > 3000:
+        drzavni_porez = 250000
+    elif kubikaza > 2500:
+        drzavni_porez = 120000
+    elif kubikaza > 2000:
+        drzavni_porez = 58000
     elif kubikaza > 1600:
-        osnovica += 10000
+        drzavni_porez = 15000
+    elif kubikaza > 1300:
+        drzavni_porez = 6000
 
-    if snaga > 100:
-        osnovica += 7000
-
+    # 3. Amortizacija - popust na državni porez prema godištu vozila
     starost = 2026 - godiste
     if starost > 20:
-        osnovica = osnovica * 0.2
+        drzavni_porez = drzavni_porez * 0.20  # Popust 80%
     elif starost > 10:
-        osnovica = osnovica * 0.6
+        drzavni_porez = drzavni_porez * 0.60  # Popust 40%
     elif starost > 5:
-        osnovica = osnovica * 0.8
+        drzavni_porez = drzavni_porez * 0.85  # Popust 20%
+
+    # 4. Fiksni troškovi (Tehnički pregled oko 5000-6000 RSD + nove takse i nalepnica oko 3000 RSD)
+    fiksni_troskovi = 8500
+
+    # Konačan zbir svih stavki
+    procenjena_cena = int(cena_osiguranja + drzavni_porez + fiksni_troskovi)
+
 
     procenjena_cena = int(osnovica + 6000)
     st.write("")
