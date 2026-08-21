@@ -353,5 +353,5 @@ with fut_sredina:
     
         <p style="margin: 25px 0 0 0; font-size: 13px; color: #ffffff !important;">© 2026 AM AUTO. Sva prava zadržana. | Powered by MAGICOMP</p>
     </div>
-    """
-           st.markdown(kontakt_tekst, unsafe_allow_html=True)
+       """
+st.markdown(kontakt_tekst, unsafe_allow_html=True)
