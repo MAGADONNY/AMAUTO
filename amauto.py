@@ -342,7 +342,7 @@ with fut_sredina:
         <p style="margin: 5px 0; color: #ffffff !important;">📍 Adresa: <strong style="color: #ffffff !important;">1. Novembar 250, LAĆARAK</strong></p>
         <p style="margin: 5px 0; color: #ffffff !important;">📞 Telefon: <strong style="color: #ffffff !important;">061 / 60-65-018</strong></p>
         <p style="margin: 5px 0; color: #ffffff !important;">📧 Email: <strong style="color: #ffffff !important;">am.auto@gmail.com</strong></p>
-        <p style="margin: 25px 0 0 0; font-size: 13px; color: #aaaaaa !important;">© 2026 AM AUTO. Sva prava zadržana. | Powered by MAGICOMP</p>
+        <p style="margin: 25px 0 0 0; font-size: 13px; color: #ffffff !important;">© 2026 AM AUTO. Sva prava zadržana. | Powered by MAGICOMP</p>
     </div>
     """
            st.markdown(kontakt_tekst, unsafe_allow_html=True)
