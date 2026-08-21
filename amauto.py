@@ -239,7 +239,7 @@ zaglavlje_html = f"""
     </div>
 </div>
 """
-st.markdown(zaglavlje_html, unsafe_allow_html=True)
+st.markdown(zaglavlje_html, Reality=True)
 
 st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
@@ -291,14 +291,17 @@ with col3:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# INTERAKTIVNI ORJENTACIONI KALKULATOR SA POLJIMA UŽIM ZA 20%
+# INTERAKTIVNI ORJENTACIONI KALKULATOR
 st.write("---")
 st.markdown('<h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif; margin-bottom: 0px;">ORJENTACIONI KALKULATOR TROŠKOVA</h2>', unsafe_allow_html=True)
 st.markdown('<p style="text-align: center; color: #666666; font-family: sans-serif; font-size: 14px; margin-top: 5px; margin-bottom: 25px;">za tačan iznos molimo da nas kontaktirate</p>', unsafe_allow_html=True)
 
-with st.container():
-    # Dodate dve prazne kolone (indeksi 0 i 4) koje sabijaju središnja polja za oko 20%
-    k_col0, k_col1, k_col2, k_col3, k_col4 = st.columns([1, 2, 2, 2, 1])
+# Kreiranje spoljnog rasporeda za poravnanje celog segmenta kalkulatora na PC-ju
+glavni_kalk_col0, glavni_kalk_sredina, glavni_kalk_col4 = st.columns([1, 3, 1])
+
+with glavni_kalk_sredina:
+    # Unutrašnje kolone za tri polja kako bi imala identičnu širinu
+    k_col1, k_col2, k_col3 = st.columns(3)
     
     with k_col1:
         kubikaza = st.number_input("Zapremina motora (ccm):", min_value=500, max_value=6000, value=1998, step=50, key="calc_ccm")
@@ -328,11 +331,5 @@ with st.container():
 
     procenjena_cena = int(osnovica + 6000)
     
-    # Smeštanje rezultata u isti suženi raspored kolona
-    with k_col1:
-        st.write("") # Mali razmak iznad rezultata
-    
-    # Prikaz se prostire kroz središnje tri kolone kako bi pratio širinu polja
-    with k_col2:
-        st.info(f"Procena troškova: oko {procenjena_cena:,} RSD")
-
+    # Plava kutija sa rezultatom je sada izvan k_col2 i širi se preko celog središnjeg dela (širina sva 3 polja)
+    st.write("") # Mali vertikalni razmak
