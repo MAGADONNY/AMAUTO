@@ -346,13 +346,11 @@ with glavni_kalk_sadrzaj:
     # Konačan zbir svih stavki
     procenjena_cena = int(cena_osiguranja + drzavni_porez + fiksni_troskovi)
 
-
-    procenjena_cena = int(osnovica + 6000)
     st.write("")
-st.info(f"Procena troškova registracije: oko {procenjena_cena:,} RSD")
+    st.info(f"Procena troškova registracije: oko {procenjena_cena:,} RSD")
 
 
-# VRAĆENA ČISTA I FINO PODEŠENA KONTAKT SEKCIJA
+    # VRAĆENA ČISTA I FINO PODEŠENA KONTAKT SEKCIJA
 st.write("---")
 
 st.markdown('<p style="text-align: center; font-size: 18px; font-weight: normal; color: #ffffff !important; font-family: sans-serif; margin-bottom: 20px; letter-spacing: 1px; width: 100%; max-width: 320px; margin-left: auto; margin-right: auto;">KONTAKT       </p>', unsafe_allow_html=True)
