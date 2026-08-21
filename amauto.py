@@ -338,20 +338,11 @@ fut_col1, fut_sredina, fut_col3 = st.columns(3)
 with fut_sredina:
 
            kontakt_tekst = """
-           
     <div style="font-family: sans-serif; font-size: 16px; color: #ffffff !important; line-height: 1.6; text-align: left; padding-left: 10px;">
         <p style="margin: 5px 0; color: #ffffff !important;">📍 Adresa: <strong style="color: #ffffff !important;">1. Novembar 250, LAĆARAK</strong></p>
         <p style="margin: 5px 0; color: #ffffff !important;">📞 Telefon: <strong style="color: #ffffff !important;">061 / 60-65-018</strong></p>
         <p style="margin: 5px 0; color: #ffffff !important;">📧 Email: <strong style="color: #ffffff !important;">am.auto@gmail.com</strong></p>
-        <p style="margin: 5px 0; color: #ffffff !important;">🕒 Radno vreme: <strong style="color: #ffffff !important;">Pon-Pet: 08h - 15:30h | Sub: 08h - 12h</strong></p>
-        
-        <div style="margin-top: 30px; font-size: 13px; color: #aaaaaa !important; text-align: center;">
-            <p style="margin: 0;">© 2026 AM AUTO. Sva prava zadržana.</p>
-            <p style="margin: 5px 0 0 0;">Powered by MAGICOMP</p>
-        </div>
-    </div>
-    
         <p style="margin: 25px 0 0 0; font-size: 13px; color: #ffffff !important;">© 2026 AM AUTO. Sva prava zadržana. | Powered by MAGICOMP</p>
     </div>
-       """
-st.markdown(kontakt_tekst, unsafe_allow_html=True)
+    """
+           st.markdown(kontakt_tekst, unsafe_allow_html=True)
