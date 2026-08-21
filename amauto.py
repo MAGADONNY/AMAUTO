@@ -291,13 +291,14 @@ with col3:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# NOV, IZVORNI I ČIST KALKULATOR
+# INTERAKTIVNI ORJENTACIONI KALKULATOR SA POLJIMA UŽIM ZA 20%
 st.write("---")
 st.markdown('<h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif; margin-bottom: 0px;">ORJENTACIONI KALKULATOR TROŠKOVA</h2>', unsafe_allow_html=True)
-st.markdown('<p style="text-align: center; color: #666666; font-family: sans-serif; font-size: 14px; margin-top: 5px;">za tačan iznos molimo da nas kontaktirate</p>', unsafe_allow_html=True)
+st.markdown('<p style="text-align: center; color: #666666; font-family: sans-serif; font-size: 14px; margin-top: 5px; margin-bottom: 25px;">za tačan iznos molimo da nas kontaktirate</p>', unsafe_allow_html=True)
 
 with st.container():
-    k_col1, k_col2, k_col3 = st.columns(3)
+    # Dodate dve prazne kolone (indeksi 0 i 4) koje sabijaju središnja polja za oko 20%
+    k_col0, k_col1, k_col2, k_col3, k_col4 = st.columns([1, 2, 2, 2, 1])
     
     with k_col1:
         kubikaza = st.number_input("Zapremina motora (ccm):", min_value=500, max_value=6000, value=1998, step=50, key="calc_ccm")
@@ -326,9 +327,12 @@ with st.container():
         osnovica = osnovica * 0.8
 
     procenjena_cena = int(osnovica + 6000)
-    st.info(f"Okvirna procena troškova registracije: oko {procenjena_cena:,} RSD")
+    
+    # Smeštanje rezultata u isti suženi raspored kolona
+    with k_col1:
+        st.write("") # Mali razmak iznad rezultata
+    
+    # Prikaz se prostire kroz središnje tri kolone kako bi pratio širinu polja
+    with k_col2:
+        st.info(f"Procena troškova: oko {procenjena_cena:,} RSD")
 
-# POTPUNO SIGURAN KONTAKT FAJLI BEZ DUGAČKIH NAVODNIKA I BEZ SUVIŠNOG TAGA NA KRAJU
-kontakt_html = "<div id='kontakt' class='contact-footer' style='font-family: sans-serif;'>"
-kontakt_html += "<h2 style='font-weight: 700; margin-bottom: 10px;'>KONTAKT INFORMACIJE</h2>"
-kontakt_html += "<div style='width: 35px; height: 2px; background-color: #E53E3E; margin: 0 auto 40px auto;'></div>"
