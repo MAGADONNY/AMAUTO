@@ -24,7 +24,7 @@ pozadina_b64 = ucitaj_sliku_base64("AMBck.JPG")
 izvor_logotipa = logo_b64 if logo_b64 else "https://placeholder.com"
 stil_pozadine = f"url('{pozadina_b64}');" if pozadina_b64 else "linear-gradient(135deg, #111111 0%, #222222 100%);"
 
-# 3. Globalni CSS stilovi (Uklonjen f-string da karakteri poput % ne prave konflikt)
+# 3. Globalni CSS stilovi
 css_stilovi = """
 <style>
 #MainMenu {visibility: hidden;}
@@ -179,10 +179,6 @@ html {
 .usluge-sekcija {
     margin-top: 20px !important;
 }
-.kalkulator-sekcija {
-    margin-top: 50px !important;
-    padding: 0 5%;
-}
 .contact-footer {
     background-color: #111111;
     color: white;
@@ -209,7 +205,7 @@ html {
         margin-bottom: -15px !important; 
     }
     .contact-footer {
-        transform: translateY(-60px);
+        transform: translateY(-40px);
         padding: 40px 20px;
     }
 }
@@ -224,7 +220,6 @@ html {
 </style>
 """
 
-# Ubacivanje dinamičke pozadine spajanjem stringova
 css_sa_pozadinom = css_stilovi.replace(".hero-background-animated {", f".hero-background-animated {{ background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75)), {stil_pozadine}")
 st.markdown(css_sa_pozadinom, unsafe_allow_html=True)
 
@@ -293,9 +288,9 @@ with col3:
 st.markdown('</div>', unsafe_allow_html=True)
 
 # INTERAKTIVNI ORJENTACIONI KALKULATOR
-st.markdown('<div class="kalkulator-sekcija">', unsafe_allow_html=True)
+st.markdown('<br><hr><br>', unsafe_allow_html=True)
 st.markdown('<h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif; margin-bottom: 0px;">ORJENTACIONI KALKULATOR TROŠKOVA</h2>', unsafe_allow_html=True)
-st.markdown('<p style="text-align: center; color: #666666; font-family: sans-serif; font-size: 15px; margin-top: 5px; margin-bottom: 25px;">za tačan iznos molimo da nas kontaktirate</p>', unsafe_allow_html=True)
+st.caption('<div style="text-align: center; font-size: 15px; margin-bottom: 25px;">za tačan iznos molimo da nas kontaktirate</div>', unsafe_allow_html=True)
 
 k_col1, k_col2, k_col3 = st.columns(3)
 
@@ -327,13 +322,12 @@ elif starost > 5:
 
 procenjena_cena = int(osnovica + 6000)
 
-st.subheader("Okvirna procena troškova registracije:")
-st.info(f"oko {procenjena_cena} RSD")
-
-st.markdown('</div>', unsafe_allow_html=True)
+st.markdown('<br><h4 style="text-align: center; font-family: sans-serif;">Okvirna procena troškova registracije:</h4>', unsafe_allow_html=True)
+st.info(f"Oko {procenjena_cena:,} RSD")
 
 # TAMNA KONTAKT SEKCIJA
 st.markdown("""
     <div id="kontakt" class="contact-footer" style="font-family: sans-serif;">
         <h2 style="font-weight: 700; margin-bottom: 10px;">KONTAKT INFORMACIJE</h2>
         <div style="width: 35px; height: 2px; background-color: #E53E3E; margin: 0 auto 40px auto;"></div>
+        <p class="contact-item">📍 Adresa: <strong>1. Novembar 250, LAĆARAK</strong></p>
