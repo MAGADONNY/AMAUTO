@@ -205,7 +205,6 @@ html {
         margin-bottom: -15px !important; 
     }
     .contact-footer {
-        transform: translateY(0px) !important;
         padding: 40px 20px;
         margin-top: 40px !important;
     }
@@ -288,19 +287,19 @@ with col3:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# INTERAKTIVNI ORJENTACIONI KALKULATOR (Smanjen i od-boldovan font)
+# INTERAKTIVNI ORJENTACIONI KALKULATOR (Proširen za komotan izgled)
 st.write("---")
 st.markdown('<p style="text-align: center; font-size: 22px; font-weight: normal; color: #111111; font-family: sans-serif; margin-bottom: 0px; letter-spacing: 1px;">ORJENTACIONI KALKULATOR TROŠKOVA</p>', unsafe_allow_html=True)
 st.markdown('<p style="text-align: center; color: #666666; font-family: sans-serif; font-size: 14px; margin-top: 5px; margin-bottom: 25px;">za tačan iznos molimo da nas kontaktirate</p>', unsafe_allow_html=True)
 
-# Smeštanje kalkulatora u bezbedan raspored od 3 kolone (širina polja)
-glavni_kalk_col1, glavni_kalk_sredina, glavni_kalk_col3 = st.columns(3)
+# Preraspodela kolona [1, 10, 1] proširuje središnji segment za kalkulator na PC-ju
+glavni_kalk_levo, glavni_kalk_sadrzaj, glavni_kalk_desno = st.columns([1, 10, 1])
 
-with glavni_kalk_sredina:
+with glavni_kalk_sadrzaj:
     k_col1, k_col2, k_col3 = st.columns(3)
     
     with k_col1:
-        kubikaza = st.number_input("Zapremina motora (ccm):", min_value=500, max_value=6000, value=1998, step=50, key="calc_ccm")
+        kubikaza = st.number_input("Zapremina (ccm):", min_value=500, max_value=6000, value=1998, step=50, key="calc_ccm")
         
     with k_col2:
         snaga = st.number_input("Snaga motora (kW):", min_value=10, max_value=500, value=85, step=5, key="calc_kw")
@@ -319,7 +318,7 @@ with glavni_kalk_sredina:
 
     starost = 2026 - godiste
     if starost > 20:
-        osnovica = osnovica * 0.2
+        osnovica =工艺 = osnovica * 0.2
     elif starost > 10:
         osnovica = osnovica * 0.6
     elif starost > 5:
@@ -330,5 +329,6 @@ with glavni_kalk_sredina:
     st.write("")
     st.info(f"Procena troškova registracije: oko {procenjena_cena:,} RSD")
 
-# TAMNA KONTAKT SEKCIJA (Futer)
-kontakt_html = "<div id='kontakt' class='contact-footer' style='font-family: sans-serif;'>"
+st.write("<br>", unsafe_allow_html=True)
+
+# TAMNA KONTAKT SEKCIJA (Futer uspešno vraćen i pozicioniran izvan svih kolona)
