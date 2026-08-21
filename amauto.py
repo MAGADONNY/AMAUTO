@@ -334,8 +334,6 @@ st.write("---")
 
 st.markdown('<p style="text-align: center; font-size: 22px; font-weight: normal; color: #111111; font-family: sans-serif; margin-bottom: 20px; letter-spacing: 1px; width: 100%; max-width: 320px; margin-left: auto; margin-right: auto;">KONTAKT INFORMACIJE</p>', unsafe_allow_html=True)
 
-st.markdown('<p style="text-align: left; padding-left: 15px; font-size: 22px; font-weight: normal; color: #111111; font-family: sans-serif; margin-bottom: 20px; letter-spacing: 1px;">KONTAKT INFORMACIJE</p>', unsafe_allow_html=True)
-
 fut_col1, fut_sredina, fut_col3 = st.columns(3)
 with fut_sredina:
     kontakt_tekst = """
