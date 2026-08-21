@@ -24,7 +24,7 @@ pozadina_b64 = ucitaj_sliku_base64("AMBck.JPG")
 izvor_logotipa = logo_b64 if logo_b64 else "https://placeholder.com"
 stil_pozadine = f"url('{pozadina_b64}');" if pozadina_b64 else "linear-gradient(135deg, #111111 0%, #222222 100%);"
 
-# 3. Globalni CSS stilovi (Čišćenje Streamlit praznina i podešavanje Flexbox-a)
+# 3. Globalni CSS stilovi
 css_stilovi = f"""
 <style>
 #MainMenu {{visibility: hidden;}}
@@ -165,51 +165,49 @@ html {{
     transform: translateY(-2px);
 }}
 
-/* NOVI STRUKTURNI CSS ZA BOXOVE (Nezavisan od Streamlita) */
-.custom-services-wrapper {{
-    font-family: sans-serif;
-    margin-top: 30px;
-    padding: 0 5%;
-}}
-
-.cards-container {{
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    margin-bottom: 40px; /* Kontroliše razmak do Kontakta na PC-ju */
-}}
-
-.custom-card {{
+/* REORGANIZOVANI CSS ZA KARTICE */
+.service-box-custom {{
     background-color: #f9f9f9;
     padding: 20px 15px;
     border-radius: 6px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-    flex: 1; /* Sve tri kartice imaju identičnu širinu */
+    width: 100%;
+}}
+.border-black {{ border-top: 4px solid #111111; }}
+.border-red {{ border-top: 4px solid #E53E3E; }}
+
+/* Kontrola spoljnih razmaka */
+.usluge-omotac {{
+    margin-top: 30px !important;
 }}
 
-.card-black {{ border-top: 4px solid #111111; }}
-.card-red {{ border-top: 4px solid #E53E3E; }}
+.kontakt-omotac {{
+    margin-top: 30px !important;
+}}
 
-.contact-footer {{
+@media (max-width: 768px) {{
+    .usluge-omotac {{
+        margin-top: -40px !important; /* Povlačenje sekcije usluga bliže slici na telefonu */
+    }}
+    .kontakt-omotac {{
+        margin-top: -15px !important; /* Jače privlačenje kontakta na dnu ekrana telefona */
+    }}
+    /* Smanjenje fabričkog Streamlit razmaka između kolona na telefonu */
+    div[data-testid="column"] {{
+        margin-bottom: 12px !important;
+    }}
+}}
+
+.contact-footer-custom {{
     background-color: #111111;
     color: white;
     padding: 50px 40px;
     text-align: center;
-    margin-top: 0px;
 }}
 
-/* PRILAGOĐAVANJE ZA MOBILNE TELEFONE */
 @media (max-width: 768px) {{
-    .custom-services-wrapper {{
-        margin-top: -30px !important; /* Povlači "Naše usluge" bliže slici na telefonu */
-    }}
-    .cards-container {{
-        flex-direction: column; /* Ređa kartice jednu ispod druge */
-        gap: 12px; /* Smanjuje prevelik razmak između samih kutija na telefonu */
-        margin-bottom: 25px; /* Smanjuje razmak između poslednje kutije i Kontakta */
-    }}
-    .contact-footer {{
+    .contact-footer-custom {{
         padding: 40px 20px;
     }}
 }}
@@ -227,7 +225,7 @@ st.markdown(css_stilovi, unsafe_allow_html=True)
 
 # 4. IZGRADNJA SAJTA
 
-zaglavlje_html = f"""
+st.markdown(f"""
 <div class="custom-header">
     <div class="logo-container">
         <img src="{izvor_logotipa}" alt="AM AUTO Logo">
@@ -236,12 +234,11 @@ zaglavlje_html = f"""
         <a href="tel:+381616065018">📞 061 / 60-65-018</a>
     </div>
 </div>
-"""
-st.markdown(zaglavlje_html, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
 st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
-hero_html = f"""
+st.markdown(f"""
 <div class="hero-container">
     <div class="hero-background-animated"></div>
     <div class="hero-content">
@@ -250,40 +247,48 @@ hero_html = f"""
         <a href="#kontakt" class="hero-btn">KONTAKTIRAJTE NAS</a>
     </div>
 </div>
-"""
-st.markdown(hero_html, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
-# CELA DONJA SEKCIJA SPOJENA U JEDAN KONTROLISANI HTML BLOK
-donji_segment_html = """
-<div class="custom-services-wrapper">
-    <h2 style="text-align: center; font-weight: 700; color: #111111; margin-bottom: 0px;">NAŠE USLUGE</h2>
-    <div style="width: 50px; height: 3px; background-color: #E53E3E; margin: 10px auto 30px auto;"></div>
-    
-    <div class="cards-container">
-        <!-- Kartica 1 -->
-        <div class="custom-card card-black">
-            <div style="font-size: 35px; margin-bottom: 5px;">📝</div>
-            <h3 style="font-weight: 700; margin-bottom: 8px; color: #111111; font-size: 18px;">Registracija vozila</h3>
-            <p style="color: #666666; line-height: 1.5; font-size: 14px; margin-bottom: 0px;">Kompletna usluga tehničkog pregleda, osiguranja i izdavanja nalepnica bez odlaska u MUP.</p>
-        </div>
-        
-        <!-- Kartica 2 -->
-        <div class="custom-card card-red">
-            <div style="font-size: 35px; margin-bottom: 5px;">🚗</div>
-            <h3 style="font-weight: 700; margin-bottom: 8px; color: #111111; font-size: 18px;">Uvoz vozila</h3>
-            <p style="color: #666666; line-height: 1.5; font-size: 14px; margin-bottom: 0px;">Pomoć pri odabiru, organizacija transporta, carinjenje i kompletna dokumentacija za uvoz automobila.</p>
-        </div>
-        
-        <!-- Kartica 3 -->
-        <div class="custom-card card-black">
-            <div style="font-size: 35px; margin-bottom: 5px;">💳</div>
-            <h3 style="font-weight: 700; margin-bottom: 8px; color: #111111; font-size: 18px;">Platni promet</h3>
-            <p style="color: #666666; line-height: 1.5; font-size: 14px; margin-bottom: 0px;">Brzo i sigurno plaćanje svih vrsta računa, taksi i uplatnica direktno na našem šalteru.</p>
-        </div>
+# ODVOJENI POZIVI DA BI STREAMLIT ISPRAVNO RENDERISAO HTML
+st.markdown('<div class="usluge-omotac">', unsafe_allow_html=True)
+st.markdown('<h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif; margin-bottom: 0px;">NAŠE USLUGE</h2>', unsafe_allow_html=True)
+st.markdown('<div style="width: 50px; height: 3px; background-color: #E53E3E; margin: 10px auto 30px auto;"></div>', unsafe_allow_html=True)
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.markdown("""
+    <div class="service-box-custom border-black" style="font-family: sans-serif;">
+        <div style="font-size: 35px; margin-bottom: 5px;">📝</div>
+        <h3 style="font-weight: 700; margin-bottom: 8px; color: #111111; font-size: 18px;">Registracija vozila</h3>
+        <p style="color: #666666; line-height: 1.5; font-size: 14px; margin-bottom: 0px;">Kompletna usluga tehničkog pregleda, osiguranja i izdavanja nalepnica bez odlaska u MUP.</p>
     </div>
-</div>
+    """, unsafe_allow_html=True)
 
-<div id="kontakt" class="contact-footer" style="font-family: sans-serif;">
+with col2:
+    st.markdown("""
+    <div class="service-box-custom border-red" style="font-family: sans-serif;">
+        <div style="font-size: 35px; margin-bottom: 5px;">🚗</div>
+        <h3 style="font-weight: 700; margin-bottom: 8px; color: #111111; font-size: 18px;">Uvoz vozila</h3>
+        <p style="color: #666666; line-height: 1.5; font-size: 14px; margin-bottom: 0px;">Pomoć pri odabiru, organizacija transporta, carinjenje i kompletna dokumentacija za uvoz automobila.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col3:
+    st.markdown("""
+    <div class="service-box-custom border-black" style="font-family: sans-serif;">
+        <div style="font-size: 35px; margin-bottom: 5px;">💳</div>
+        <h3 style="font-weight: 700; margin-bottom: 8px; color: #111111; font-size: 18px;">Platni promet</h3>
+        <p style="color: #666666; line-height: 1.5; font-size: 14px; margin-bottom: 0px;">Brzo i sigurno plaćanje svih vrsta računa, taksi i uplatnica direktno na našem šalteru.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown('</div>', unsafe_allow_html=True)
+
+# ODVOJENA KONTAKT SEKCIJA
+st.markdown('<div class="kontakt-omotac">', unsafe_allow_html=True)
+st.markdown("""
+<div id="kontakt" class="contact-footer-custom" style="font-family: sans-serif;">
     <h2 style="font-weight: 700; margin-bottom: 10px;">KONTAKT INFORMACIJE</h2>
     <div style="width: 35px; height: 2px; background-color: #E53E3E; margin: 0 auto 40px auto;"></div>
     <p style="font-size: 17px; color: #dddddd; margin-bottom: 15px;">📍 Adresa: <strong>1. Novembar 250, LAĆARAK</strong></p>
@@ -292,7 +297,7 @@ donji_segment_html = """
     <p style="font-size: 14px; color: #555555; margin-top: 40px;">&copy; 2026 AM AUTO. Sva prava zadržana.</p>
     <div class="powered-by">Powered by MAGICOMP</div>
 </div>
-"""
-st.markdown(donji_segment_html, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
