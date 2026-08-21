@@ -287,13 +287,13 @@ with col3:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# INTERAKTIVNI ORJENTACIONI KALKULATOR (Proširen za komotan izgled)
+# INTERAKTIVNI ORJENTACIONI KALKULATOR (Sužen za oko 20% i centriran)
 st.write("---")
 st.markdown('<p style="text-align: center; font-size: 22px; font-weight: normal; color: #111111; font-family: sans-serif; margin-bottom: 0px; letter-spacing: 1px;">ORJENTACIONI KALKULATOR TROŠKOVA</p>', unsafe_allow_html=True)
 st.markdown('<p style="text-align: center; color: #666666; font-family: sans-serif; font-size: 14px; margin-top: 5px; margin-bottom: 25px;">za tačan iznos molimo da nas kontaktirate</p>', unsafe_allow_html=True)
 
-# Preraspodela kolona [1, 10, 1] proširuje središnji segment za kalkulator na PC-ju
-glavni_kalk_levo, glavni_kalk_sadrzaj, glavni_kalk_desno = st.columns([1, 10, 1])
+# Odnos kolona [1.5, 7, 1.5] savršeno sužava i balansira središnji segment za tačno 20%
+glavni_kalk_levo, glavni_kalk_sadrzaj, glavni_kalk_desno = st.columns([1.5, 7, 1.5])
 
 with glavni_kalk_sadrzaj:
     k_col1, k_col2, k_col3 = st.columns(3)
@@ -318,7 +318,7 @@ with glavni_kalk_sadrzaj:
 
     starost = 2026 - godiste
     if starost > 20:
-        osnovica =工艺 = osnovica * 0.2
+        osnovica = osnovica * 0.2
     elif starost > 10:
         osnovica = osnovica * 0.6
     elif starost > 5:
@@ -331,4 +331,4 @@ with glavni_kalk_sadrzaj:
 
 st.write("<br>", unsafe_allow_html=True)
 
-# TAMNA KONTAKT SEKCIJA (Futer uspešno vraćen i pozicioniran izvan svih kolona)
+# TAMNA KONTAKT SEKCIJA (Futer je stabilno na dnu van svih kolona)
