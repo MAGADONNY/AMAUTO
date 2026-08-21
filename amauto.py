@@ -188,7 +188,7 @@ html {
     color: white;
     padding: 50px 40px;
     text-align: center;
-    margin-top: 40px !important;
+    margin-top: 60px !important;
 }
 
 /* STIL ZA ZBIJANJE REDOVA U KONTAKTU */
@@ -209,8 +209,9 @@ html {
         margin-bottom: -15px !important; 
     }
     .contact-footer {
-        transform: translateY(-40px);
+        transform: translateY(0px) !important;
         padding: 40px 20px;
+        margin-top: 40px !important;
     }
 }
 
@@ -291,16 +292,14 @@ with col3:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# INTERAKTIVNI ORJENTACIONI KALKULATOR
+# INTERAKTIVNI ORJENTACIONI KALKULATOR (Smanjen i od-boldovan naslov)
 st.write("---")
-st.markdown('<h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif; margin-bottom: 0px;">ORJENTACIONI KALKULATOR TROŠKOVA</h2>', unsafe_allow_html=True)
+st.markdown('<h3 style="text-align: center; font-weight: 400; color: #111111; font-family: sans-serif; margin-bottom: 0px; letter-spacing: 1px;">ORJENTACIONI KALKULATOR TROŠKOVA</h3>', unsafe_allow_html=True)
 st.markdown('<p style="text-align: center; color: #666666; font-family: sans-serif; font-size: 14px; margin-top: 5px; margin-bottom: 25px;">za tačan iznos molimo da nas kontaktirate</p>', unsafe_allow_html=True)
 
-# Spoljni raspored za centriranje na PC-ju
-glavni_kalk_col0, glavni_kalk_sredina, glavni_kalk_col4 = st.columns([1, 8, 1])
+glavni_kalk_col0, glavni_kalk_sredina, glavni_kalk_col4 = st.columns()
 
 with glavni_kalk_sredina:
-    # Tri kolone za ravnomeran horizontalni prikaz polja
     k_col1, k_col2, k_col3 = st.columns(3)
     
     with k_col1:
@@ -331,8 +330,8 @@ with glavni_kalk_sredina:
 
     procenjena_cena = int(osnovica + 6000)
     
-    # Plava kutija rastegnuta celom dužinom ispod sva tri polja
     st.write("")
     st.info(f"Procena troškova registracije: oko {procenjena_cena:,} RSD")
 
-# TAMNA KONTAKT SEKCIJA
+# TAMNA KONTAKT SEKCIJA (Izvučena skroz van kolona na čistu površinu)
+kontakt_html = "<div id='kontakt' class='contact-footer' style='font-family: sans-serif;'>"
