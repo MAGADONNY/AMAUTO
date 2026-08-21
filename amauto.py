@@ -239,7 +239,7 @@ zaglavlje_html = f"""
     </div>
 </div>
 """
-st.markdown(zaglavlje_html, Reality=True)
+st.markdown(zaglavlje_html, unsafe_allow_html=True)
 
 st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
@@ -296,11 +296,11 @@ st.write("---")
 st.markdown('<h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif; margin-bottom: 0px;">ORJENTACIONI KALKULATOR TROŠKOVA</h2>', unsafe_allow_html=True)
 st.markdown('<p style="text-align: center; color: #666666; font-family: sans-serif; font-size: 14px; margin-top: 5px; margin-bottom: 25px;">za tačan iznos molimo da nas kontaktirate</p>', unsafe_allow_html=True)
 
-# Kreiranje spoljnog rasporeda za poravnanje celog segmenta kalkulatora na PC-ju
-glavni_kalk_col0, glavni_kalk_sredina, glavni_kalk_col4 = st.columns([1, 3, 1])
+# Spoljni raspored za centriranje na PC-ju
+glavni_kalk_col0, glavni_kalk_sredina, glavni_kalk_col4 = st.columns([1, 8, 1])
 
 with glavni_kalk_sredina:
-    # Unutrašnje kolone za tri polja kako bi imala identičnu širinu
+    # Tri kolone za ravnomeran horizontalni prikaz polja
     k_col1, k_col2, k_col3 = st.columns(3)
     
     with k_col1:
@@ -331,5 +331,8 @@ with glavni_kalk_sredina:
 
     procenjena_cena = int(osnovica + 6000)
     
-    # Plava kutija sa rezultatom je sada izvan k_col2 i širi se preko celog središnjeg dela (širina sva 3 polja)
-    st.write("") # Mali vertikalni razmak
+    # Plava kutija rastegnuta celom dužinom ispod sva tri polja
+    st.write("")
+    st.info(f"Procena troškova registracije: oko {procenjena_cena:,} RSD")
+
+# TAMNA KONTAKT SEKCIJA
