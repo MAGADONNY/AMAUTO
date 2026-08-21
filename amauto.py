@@ -289,7 +289,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 
 # INTERAKTIVNI ORJENTACIONI KALKULATOR
 st.write("---")
-st.markdown('<p style="text-align: center; font-size: 22px; font-weight: normal; color: #111111; font-family: sans-serif; margin-bottom: 0px; letter-spacing: 1px;">ORJENTACIONI KALKULATOR TROŠKOVA</p>', unsafe_allow_html=True)
+st.markdown('<p style="text-align: center; font-size: 22px; font-weight: normal; color: #ffffff; font-family: sans-serif; margin-bottom: 0px; letter-spacing: 1px;">ORJENTACIONI KALKULATOR TROŠKOVA</p>', unsafe_allow_html=True)
 st.markdown('<p style="text-align: center; color: #666666; font-family: sans-serif; font-size: 14px; margin-top: 5px; margin-bottom: 25px;">za tačan iznos molimo da nas kontaktirate</p>', unsafe_allow_html=True)
 
 # Odnos kolona [1.5, 7, 1.5] za savršeno sužene i centrirane unose
