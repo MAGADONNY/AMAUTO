@@ -180,6 +180,10 @@ html {{
 .usluge-sekcija {{
     margin-top: 20px !important;
 }}
+.kalkulator-sekcija {{
+    margin-top: 50px !important;
+    padding: 0 5%;
+}}
 .contact-footer {{
     background-color: #111111;
     color: white;
@@ -192,7 +196,7 @@ html {{
 .contact-item {{
     font-size: 17px;
     color: #dddddd;
-    margin: 6px 0 !important; /* Ekstremno smanjenje gornjeg i donjeg razmaka između redova */
+    margin: 6px 0 !important;
     padding: 0 !important;
     line-height: 1.4;
 }}
@@ -208,9 +212,6 @@ html {{
     .contact-footer {{
         transform: translateY(-60px);
         padding: 40px 20px;
-    }}
-    .contact-item {{
-        margin: 4px 0 !important; /* Još malo gušće na telefonima ako zatreba */
     }}
 }}
 
@@ -287,17 +288,46 @@ with col3:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# TAMNA KONTAKT SEKCIJA SA DODATOM KLASOM ZA ZBIJANJE TEKSTA
-st.markdown("""
-    <div id="kontakt" class="contact-footer" style="font-family: sans-serif;">
-        <h2 style="font-weight: 700; margin-bottom: 10px;">KONTAKT INFORMACIJE</h2>
-        <div style="width: 35px; height: 2px; background-color: #E53E3E; margin: 0 auto 30px auto;"></div>
-        <p class="contact-item">📍 Adresa: <strong>1. Novembar 250, LAĆARAK</strong></p>
-        <p class="contact-item">📞 Telefon: <a href="tel:+381616065018" style="color: white; text-decoration: none;"><strong>061 / 60-65-018</strong></a></p>
-        <p class="contact-item">📧 Email: <a href="mailto:am.auto@gmail.com" style="color: white; text-decoration: none;"><strong>am.auto@gmail.com</strong></a></p>
-        <p style="font-size: 14px; color: #555555; margin-top: 35px; margin-bottom: 0px;">&copy; 2026 AM AUTO. Sva prava zadržana.</p>
-        <div class="powered-by">Powered by MAGICOMP</div>
-    </div>
-""", unsafe_allow_html=True)
+# INTERAKTIVNI ORJENTACIONI KALKULATOR
+st.markdown('<div class="kalkulator-sekcija">', unsafe_allow_html=True)
+st.markdown('<h2 style="text-align: center; font-weight: 700; color: #111111; font-family: sans-serif; margin-bottom: 0px;">ORJENTACIONI KALKULATOR TROŠKOVA</h2>', unsafe_allow_html=True)
+st.markdown('<p style="text-align: center; color: #666666; font-family: sans-serif; font-size: 15px; margin-top: 5px; margin-bottom: 25px;">za tačan iznos molimo da nas kontaktirate</p>', unsafe_allow_html=True)
 
-st.markdown('</div>', unsafe_allow_html=True)
+# Tri kolone za horizontalni unos polja na PC-ju
+k_col1, k_col2, k_col3 = st.columns(3)
+
+with k_col1:
+    kubikaza = st.number_input("Zapremina motora (ccm):", min_value=500, max_value=6000, value=1998, step=50)
+
+with k_col2:
+    snaga = st.number_input("Snaga motora (kW):", min_value=10, max_value=500, value=85, step=5)
+
+with k_col3:
+    godiste = st.number_input("Godište vozila:", min_value=1980, max_value=2026, value=2015, step=1)
+
+# Logika za bazičnu orjentacionu cenu
+osnovica = 15000
+if kubikaza > 2000:
+    osnovica += 25000
+elif kubikaza > 1600:
+    osnovica += 10000
+
+if snaga > 100:
+    osnovica += 7000
+
+# Popust na starost vozila
+starost = 2026 - godiste
+if starost > 20:
+    osnovica = osnovica * 0.2
+elif starost > 10:
+    osnovica = osnovica * 0.6
+elif starost > 5:
+    osnovica = osnovica * 0.8
+
+procenjena_cena = int(osnovica + 6000) # Dodata fiksna cena tehničkog pregleda i taksi
+
+st.markdown(f"""
+    <div style="background-color: #f9f9f9; padding: 20px; border-radius: 6px; text-align: center; border-left: 4px solid #E53E3E; margin-top: 20px; font-family: sans-serif;">
+        <span style="font-size: 16px; color: #555555;">Okvirna procena troškova registracije:</span><br>
+        <span style="font-size: 28px; font-weight: 800; color: #111111;">oko {procenjena_cena:,} RSD</span>
+    </div>
